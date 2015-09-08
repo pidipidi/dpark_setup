@@ -1,0 +1,12 @@
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/surface_hoctomap.cpp
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/#surface_hoctomap.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/cartesian_cost_map.cpp
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/#cartesian_cost_map.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/deprecated/cartesian_cost_map.h
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/deprecated/#cartesian_cost_map.h#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/surface_hoctomap.h
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/#surface_hoctomap.h#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/ASTAR.cpp
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/#ASTAR.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/haptic_task_planner_server.cpp
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/deprecated/#haptic_task_planner_server.cpp#

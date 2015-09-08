@@ -1,0 +1,113 @@
+(add-hook 'xml-mode-hook   ; XML-specific settings
+        (function (lambda()
+
+; faces creation
+(make-face 'sgml-comment-face)
+(make-face 'sgml-start-tag-face)
+(make-face 'sgml-end-tag-face)
+(make-face 'sgml-doctype-face)
+
+; faces definitions
+(set-face-foreground 'sgml-comment-face "SeaGreen")
+(set-face-foreground 'sgml-start-tag-face "OrangeRed")
+(set-face-foreground 'sgml-end-tag-face "OrangeRed")
+(set-face-foreground 'sgml-doctype-face "MintCream")
+
+; markup to face mappings
+; (see http://www.lysator.liu.se/~lenst/about_psgml/psgml.html#Highlight for details)
+(setq sgml-markup-faces
+      '((comment . sgml-comment-face)
+        (start-tag . sgml-start-tag-face)
+        (end-tag . sgml-end-tag-face)
+        (doctype . sgml-doctype-face)
+        )
+      )
+
+; turn faces on
+(setq sgml-set-face t)
+
+)))
+
+
+(let* ((result (shell-command-to-string (concat "rospack find rosemacs")))
+       (checked-result (if (string-match "[[]" result)
+                            (progn (message result) nil)
+                          (if (string-match "[ \n]*$" result)
+                              (replace-match "" nil nil result)
+                            result))))
+         (when checked-result
+           (progn (add-to-list 'load-path checked-result)
+                  (require 'rosemacs)
+                  (invoke-rosemacs))))
+
+
+(require 'rng-loc)
+(condition-case nil ;; error e.g. when running as root
+    (push (concat (ros-package-path "rosemacs") "/rng-schemas.xml") rng-schema-locating-files)
+  (error nil))
+(add-to-list 'auto-mode-alist '("\.launch$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("manifest.xml" . nxml-mode))
+
+(global-set-key "\M-g" 'goto-line)              ; Esc-G runs the goto-line
+                                                ; function.
+
+;; Initialize with only editor
+(setq inhibit-startup-screen t)
+;; Tap as space
+(setq-default indent-tabs-mode nil)
+;; Show parenthesis 
+(show-paren-mode t)
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(show-paren-mode t)
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+;; Color
+(load-file "~/.emacs.d/color-theme/zenburn-theme.el")
+;;(zenburn)
+
+;; Auto Complete
+;;(require 'auto-complete)
+;;(global-auto-complete-mode t)
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
+
+;; C++
+(defun c++-comment-region()
+ "Comment a region out"
+ (interactive)
+ (save-excursion
+   (save-restriction
+     (narrow-to-region (point) (mark))
+     (goto-char (point-min))
+     (while (> (point-max) (point))
+ (c++-comment-line)
+ (forward-line)))))
+
+(defun c++-comment-line()
+ "Comment a line of C++ out"
+ (beginning-of-line)
+ (insert "//"))
+
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
+;; Python
+(setq py-install-directory "~/util/python-mode.el-6.1.0/")
+(add-to-list 'load-path py-install-directory)
+(require 'python-mode)
+
+;; Disable C-z
+(global-unset-key (kbd "C-z"))

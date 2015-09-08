@@ -1,0 +1,14 @@
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/traversability_planner_3D.h
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/#traversability_planner_3D.h#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/cost_map_state_validity_checker.h
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/include/hrl_traversability_planner/#cost_map_state_validity_checker.h#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/traversability_planner_3D.cpp
+/home/dpark/git/hrl-haptic-manip-dev/hrl_traversability_planner/src/#traversability_planner_3D.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_software_simulation_darpa_m3/include/simulator.h
+/home/dpark/git/hrl-haptic-manip-dev/hrl_software_simulation_darpa_m3/include/#simulator.h#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/Wall_Hole_Detector.cpp
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/#Wall_Hole_Detector.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/TargetFinder.cpp
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/#TargetFinder.cpp#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/WallDetector.cpp
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_ykim/src/#WallDetector.cpp#

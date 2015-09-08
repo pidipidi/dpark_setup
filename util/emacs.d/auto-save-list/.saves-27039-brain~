@@ -1,0 +1,8 @@
+/home/dpark/code/pr2_description_dpark/urdf/forearm_v0/forearm.gazebo.xacro
+/home/dpark/code/pr2_description_dpark/urdf/forearm_v0/#forearm.gazebo.xacro#
+/home/dpark/code/pr2_description_dpark/urdf/gripper_v0/gripper.gazebo.xacro
+/home/dpark/code/pr2_description_dpark/urdf/gripper_v0/#gripper.gazebo.xacro#
+/home/dpark/code/pr2_description_dpark/urdf/gripper_v0/gripper.urdf.xacro
+/home/dpark/code/pr2_description_dpark/urdf/gripper_v0/#gripper.urdf.xacro#
+/home/dpark/code/pr2_description_dpark/robots/pr2.urdf.xacro
+/home/dpark/code/pr2_description_dpark/robots/#pr2.urdf.xacro#

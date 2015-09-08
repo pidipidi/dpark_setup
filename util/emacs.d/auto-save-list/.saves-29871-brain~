@@ -1,0 +1,6 @@
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/pr2_no_controllers.launch
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/#pr2_no_controllers.launch#
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/pr2.launch
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/#pr2.launch#
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/pr2_empty_world.launch
+/opt/ros/fuerte/stacks/pr2_simulator/pr2_gazebo/launch/#pr2_empty_world.launch#

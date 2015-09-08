@@ -1,0 +1,14 @@
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/start_darci_fixed_sphere_server.sh
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/#start_darci_fixed_sphere_server.sh#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/batch_setup.sh
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/#batch_setup.sh#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/main_scripts/generate_trial.sh
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/main_scripts/#generate_trial.sh#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/main_scripts/run_double_trials.sh
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/main_scripts/#run_double_trials.sh#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_gazebo_darci/sdf/model.sdf
+/home/dpark/git/hrl-haptic-manip-dev/hrl_gazebo_darci/sdf/#model.sdf#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/darci_fixed_sphere.world
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/#darci_fixed_sphere.world#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/lib/gazebo_sim_lib/gazebo_sim_param.py
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/lib/gazebo_sim_lib/#gazebo_sim_param.py#

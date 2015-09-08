@@ -1,0 +1,16 @@
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/darci_fixed_cylinder_F08.world
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/#darci_fixed_cylinder_F08.world#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/start_darci_fixed_cylinder.sh
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/gazebo_plugin/#start_darci_fixed_cylinder.sh#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/mpc_teleop_rviz.py
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#mpc_teleop_rviz.py#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/start_teleop.launch
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#start_teleop.launch#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/haptic_mpc_util.py
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/#haptic_mpc_util.py#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/lib/hrl_mpc_action.py
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/lib/#hrl_mpc_action.py#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/interactive_marker_util.py
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/#interactive_marker_util.py#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/mpc_teleop_rviz.py
+/home/dpark/git/hrl-haptic-manip-dev/hrl_haptic_mpc/src/hrl_haptic_mpc/#mpc_teleop_rviz.py#

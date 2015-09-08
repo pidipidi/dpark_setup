@@ -1,0 +1,12 @@
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/teleop_Planner_client.py
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#teleop_Planner_client.py#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/mpc_teleop_rviz.py
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#mpc_teleop_rviz.py#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_dynamic_mpc/src/waypoint_generator.py
+/home/dpark/git/hrl-haptic-manip-dev/hrl_dynamic_mpc/src/#waypoint_generator.py#
+/home/dpark/git/hrl-haptic-manip-dev/hrl_dynamic_mpc/src/run_controller_pp.py
+/home/dpark/git/hrl-haptic-manip-dev/hrl_dynamic_mpc/src/#run_controller_pp.py#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/start_dynamic_mpc.launch
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#start_dynamic_mpc.launch#
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/start_teleop.launch
+/home/dpark/git/hrl-haptic-manip-dev/sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot/exp_scripts/#start_teleop.launch#
