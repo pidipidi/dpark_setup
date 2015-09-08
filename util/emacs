@@ -105,7 +105,7 @@
       c-basic-offset 4)
 
 ;; Python
-(setq py-install-directory "~/util/python-mode.el-6.1.0/")
+(setq py-install-directory "~/util/python-mode.el-6.2.0/")
 (add-to-list 'load-path py-install-directory)
 (require 'python-mode)
 
