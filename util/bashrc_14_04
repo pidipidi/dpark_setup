@@ -115,6 +115,7 @@ fi
 
 # ROS
 source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel/setup.bash
 
 # git 
 source ~/git-completion.bash 
