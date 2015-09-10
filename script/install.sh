@@ -38,3 +38,7 @@ source ~/.bashrc
 
 # util
 sudo apt-get install screen
+
+# git 
+git config --global user.email "deric.park@gatech.edu"
+git config --global user.name "pidipidi"
