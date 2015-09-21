@@ -9,6 +9,7 @@ rm ~/.bashrc
 ln -s ~/git/dpark_setup/util/bashrc_14_04 ~/.bashrc
 ln -s ~/git/dpark_setup/util/bashrc.hrl.sh ~/.bashrc.hrl.sh
 ln -s ~/git/dpark_setup/util/bashrc.gazebo.sh ~/.bashrc.gazebo.sh
+ln -s ~/git/dpark_setup/util/bashrc.kinect2.sh ~/.bashrc.kinect2.sh
 ln -s ~/git/dpark_setup/util/emacs ~/.emacs
 ln -s ~/git/dpark_setup/util/git-completion.bash ~/git-completion.bash
 ln -s ~/git/dpark_setup/util/screenrc ~/.screenrc
