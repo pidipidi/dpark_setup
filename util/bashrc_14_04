@@ -152,7 +152,7 @@ alias qq='roscd hrl_traversability_planner'
 alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
 alias ad='roscd hrl_multimodal_anomaly_detection'
 
-alias hrl_mount='sudo smbmount //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
+alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
 alias hrl_umount='sudo umount hrl_file_server -l'
 
 alias vpn='sudo vpnc /etc/vpnc/gatech.conf'
