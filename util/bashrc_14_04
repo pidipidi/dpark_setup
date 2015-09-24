@@ -133,6 +133,9 @@ export ROS_MASTER_URI=http://localhost:11311
 # added for gazebo script
 #source /home/dpark/.bashrc.gazebo.sh
 
+# added for kinect2 script
+source /home/dpark/.bashrc.kinect2.sh
+
 # some more ls aliases
 alias pr2='ssh monty1'
 alias pc1='ssh -Y pr2c1'
