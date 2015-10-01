@@ -4,19 +4,20 @@ mkdir hark
 
 sudo apt-get install libtool libgnomeui-dev libxml++2.6-dev libxml2-dev libasound2-dev libboost-dev libboost-regex-dev libboost-thread-dev libboost-program-options-dev libboost-filesystem-dev libsndfile1-dev
 
-wget http://www.hark.jp/src/2.1.0/flowdesigner-0.9.1-hark_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/libhark-netapi_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/harkfd_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/julius-4.2.3-hark-plugin_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/julius-4.2.3-hark_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/harktool4-cui_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/harktool4_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/hark-designer_2.1.0.tar.gz
-wget http://www.hark.jp/src/2.1.0/libharkio3_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/flowdesigner-0.9.1-hark_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/libhark-netapi_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/harkfd_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/julius-4.2.3-hark-plugin_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/julius-4.2.3-hark_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/harktool4-cui_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/harktool4_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/hark-designer_2.1.0.tar.gz
+#wget http://www.hark.jp/src/2.1.0/libharkio3_2.1.0.tar.gz
 wget http://www.hark.jp/src/2.1.0/hark-ros-indigo_2.1.0.tar.gz
 wget http://www.hark.jp/src/2.1.0/hark-ros-stacks-indigo_2.1.0.tar.gz
 
-
+##--------------------------------------------------------------------
+## 0. all machines
 sudo apt-get install fftw-dev
 sudo apt-get install libharkio*
 sudo apt-get install hark-music
@@ -29,6 +30,71 @@ sudo apt-get install harktool4-cui
 sudo apt-get install julius-4.2.3-hark-plugin
 sudo apt-get install librasp-netapi
 sudo apt-get install harkfd-dev
+
+
+##--------------------------------------------------------------------
+## 1.1. pr2 back pack or local machine with Kinect
+# hark ros stack
+cd ~/hark 
+tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz 
+cd hark-ros-stacks-indigo/src
+cp -r  hark* ~/catkin_ws/src/
+cd ~/catkin_ws
+catkin_make
+#catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
+catkin_make install
+
+# hark ros indigo
+cd ~/hark 
+tar -xvzf hark-ros-indigo_2.1.0.tar.gz
+cd hark-ros-indigo
+./configure --enable-ros --with-hark-inc=/usr/include/hark/
+make -j8
+sudo make install
+
+# add env variable to bashrc
+export FLOWDESIGNER_PATH=/usr/local/lib:$FLOWDESIGNER_PATH
+# reboot
+
+
+##--------------------------------------------------------------------
+## 1.2. pr2 (fuerte)
+
+
+##--------------------------------------------------------------------
+## 1.3 local machine (indigo)
+# I did not tested sudo apt-get install hark-designer 
+# hark designer
+cd ~/hark 
+tar -xvzf hark-designer_2.1.0.tar.gz 
+cd hark-designer/
+sudo apt-get install qtcreator 
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+
+sudo apt-get install ruby-compass
+sudo gem install compass
+npm install
+sudo npm install grunt-contrib-compass --save-dev
+sudo npm install -g grunt-cli
+grunt
+
+## Trouble shooting ---------------------------------------------------
+## 1. If it does not work, add symbolic link 
+# cd /usr/lib/flowdesigner/toolbox
+# sudo ln -s /usr/local/lib/flowdesigner/toolbox/hark-ros hark-ros
+## 2. If no sound card error 
+# add current user into audio group
+## 3. libroscpp.so no such file or dir
+# Reboot
+## 4. Undefined symbol err from hark-ros
+# Don't use apt-get install for hark-ros-indigo
+# You need source installation.
+## 5. hark_msgs related problem
+# You have manually catkin_make hark-ros-stack-indigo
+##--------------------------------------------------------------------
+
 
 # flowdesigner (local)
 #cd ~/hark 
@@ -47,21 +113,6 @@ sudo apt-get install harkfd-dev
 #make -j8
 #sudo make install
 
-# hark designer
-cd ~/hark 
-tar -xvzf hark-designer_2.1.0.tar.gz 
-cd hark-designer/
-sudo apt-get install qtcreator 
-sudo add-apt-repository -y ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
-
-sudo apt-get install ruby-compass
-sudo gem install compass
-npm install
-sudo npm install grunt-contrib-compass --save-dev
-sudo npm install -g grunt-cli
-grunt
 
 # harkio 3 (local)
 #cd ~/hark 
