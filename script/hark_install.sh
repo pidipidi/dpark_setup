@@ -29,7 +29,6 @@ sudo apt-get install harktool4-cui
 sudo apt-get install julius-4.2.3-hark-plugin
 sudo apt-get install librasp-netapi
 sudo apt-get install harkfd-dev
-sudo apt-get install hark-ros-stacks-indigo 
 
 # flowdesigner (local)
 #cd ~/hark 
@@ -119,13 +118,14 @@ grunt
 
 # hark ros stack
 # copy packages and catkin_make
-#cd ~/hark 
-#tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz 
-#cd hark-ros-stacks-indigo/src
-#cp -r  hark* ~/catkin_ws/src/
-#cd ~/catkin_ws
-#catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
-#catkin_make install
+##sudo apt-get install hark-ros-stacks-indigo 
+cd ~/hark 
+tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz 
+cd hark-ros-stacks-indigo/src
+cp -r  hark* ~/catkin_ws/src/
+cd ~/catkin_ws
+catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
+catkin_make install
 
 
 # hark ros indigo
