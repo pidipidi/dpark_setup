@@ -1,3 +1,11 @@
+# trusty
+sudo sh -c 'echo "deb http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos trusty non-free\ndeb-src http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos trusty non-free" > /etc/apt/sources.list.d/hark.list'
+wget -q -O - http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos/public.gpg | sudo apt-key add -
+sudo add-apt-repository ppa:chris-lea/node.js 
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get update
+
 
 cd ~/
 mkdir hark
@@ -18,18 +26,7 @@ wget http://www.hark.jp/src/2.1.0/hark-ros-stacks-indigo_2.1.0.tar.gz
 
 ##--------------------------------------------------------------------
 ## 0. all machines
-sudo apt-get install fftw-dev
-sudo apt-get install libharkio*
-sudo apt-get install hark-music
-sudo apt-get install hark-python
-sudo apt-get install hark-binaural
-sudo apt-get install hark-kinect
-sudo apt-get install hark-opencv
-sudo apt-get install harktool4
-sudo apt-get install harktool4-cui
-sudo apt-get install julius-4.2.3-hark-plugin
-sudo apt-get install librasp-netapi
-sudo apt-get install harkfd-dev
+sudo apt-get install fftw-dev libharkio* hark-music hark-python hark-binaural hark-kinect hark-opencv harktool4 harktool4-cui julius-4.2.3-hark-plugin librasp-netapi harkfd-dev
 
 
 ##--------------------------------------------------------------------
@@ -65,20 +62,21 @@ export FLOWDESIGNER_PATH=/usr/local/lib:$FLOWDESIGNER_PATH
 ## 1.3 local machine (indigo)
 # I did not tested sudo apt-get install hark-designer 
 # hark designer
-cd ~/hark 
-tar -xvzf hark-designer_2.1.0.tar.gz 
-cd hark-designer/
-sudo apt-get install qtcreator 
-sudo add-apt-repository -y ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
+sudo apt-get install hark-designer
+#cd ~/hark 
+#tar -xvzf hark-designer_2.1.0.tar.gz 
+#cd hark-designer/
+#sudo apt-get install qtcreator 
+#sudo add-apt-repository -y ppa:chris-lea/node.js
+#sudo apt-get update
+#sudo apt-get install nodejs
 
-sudo apt-get install ruby-compass
-sudo gem install compass
-npm install
-sudo npm install grunt-contrib-compass --save-dev
-sudo npm install -g grunt-cli
-grunt
+#sudo apt-get install ruby-compass
+#sudo gem install compass
+#npm install
+#sudo npm install grunt-contrib-compass --save-dev
+#sudo npm install -g grunt-cli
+#grunt
 
 ## Trouble shooting ---------------------------------------------------
 ## 1. If it does not work, add symbolic link 
