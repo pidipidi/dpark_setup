@@ -37,9 +37,15 @@ tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz
 cd hark-ros-stacks-indigo/src
 cp -r  hark* ~/catkin_ws/src/
 cd ~/catkin_ws
-catkin_make
+catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs
+catkin_make -DCATKIN_WHITELIST_PACKAGES=hark_common_msgs
+catkin_make -DCATKIN_WHITELIST_PACKAGES=hark_msgs
+catkin_make -DCATKIN_WHITELIST_PACKAGES=hark_params
+catkin_make -DCATKIN_WHITELIST_PACKAGES=hark_dynamic_reconfigure
+catkin_make -DCATKIN_WHITELIST_PACKAGES=harkviz
+catkin_make -DCATKIN_WHITELIST_PACKAGES=julius_ros
 #catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
-catkin_make install
+#catkin_make install
 
 # hark ros indigo
 cd ~/hark 
@@ -52,6 +58,26 @@ sudo make install
 # add env variable to bashrc
 export FLOWDESIGNER_PATH=/usr/local/lib:$FLOWDESIGNER_PATH
 # reboot
+
+
+## Trouble shooting ---------------------------------------------------
+## 1. If it does not work, add symbolic link 
+# cd /usr/lib/flowdesigner/toolbox
+# sudo ln -s /usr/local/lib/flowdesigner/toolbox/hark-ros hark-ros
+## 2. If no sound card error 
+# add current user into audio group
+## 3. libroscpp.so no such file or dir
+# Reboot
+## 4. Undefined symbol err from hark-ros
+# Don't use apt-get install for hark-ros-indigo
+# You need source installation.
+## 5. hark_msgs related problem
+# You have manually catkin_make hark-ros-stack-indigo
+## 6. No hark_msgs or hark_params when install hark-ros-indigo
+# You have to source your ros setup.bash
+##--------------------------------------------------------------------
+
+
 
 
 ##--------------------------------------------------------------------
@@ -77,22 +103,6 @@ sudo apt-get install hark-designer
 #sudo npm install grunt-contrib-compass --save-dev
 #sudo npm install -g grunt-cli
 #grunt
-
-## Trouble shooting ---------------------------------------------------
-## 1. If it does not work, add symbolic link 
-# cd /usr/lib/flowdesigner/toolbox
-# sudo ln -s /usr/local/lib/flowdesigner/toolbox/hark-ros hark-ros
-## 2. If no sound card error 
-# add current user into audio group
-## 3. libroscpp.so no such file or dir
-# Reboot
-## 4. Undefined symbol err from hark-ros
-# Don't use apt-get install for hark-ros-indigo
-# You need source installation.
-## 5. hark_msgs related problem
-# You have manually catkin_make hark-ros-stack-indigo
-##--------------------------------------------------------------------
-
 
 # flowdesigner (local)
 #cd ~/hark 
@@ -168,22 +178,22 @@ sudo apt-get install hark-designer
 # hark ros stack
 # copy packages and catkin_make
 ##sudo apt-get install hark-ros-stacks-indigo 
-cd ~/hark 
-tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz 
-cd hark-ros-stacks-indigo/src
-cp -r  hark* ~/catkin_ws/src/
-cd ~/catkin_ws
-catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
-catkin_make install
+#cd ~/hark 
+#tar -xvzf hark-ros-stacks-indigo_2.1.0.tar.gz 
+#cd hark-ros-stacks-indigo/src
+#cp -r  hark* ~/catkin_ws/src/
+#cd ~/catkin_ws
+#catkin_make -DCATKIN_WHITELIST_PACKAGES=fdopencv_msgs,hark_common_msgs,hark_msgs,hark_params,hark_dynamic_reconfigure,harkviz,julius_ros
+#catkin_make install
 
 
 # hark ros indigo
-cd ~/hark 
-tar -xvzf hark-ros-indigo_2.1.0.tar.gz
-cd hark-ros-indigo
-./configure --enable-ros --with-hark-inc=/usr/include/hark/
-make -j8
-sudo make install
+#cd ~/hark 
+#tar -xvzf hark-ros-indigo_2.1.0.tar.gz
+#cd hark-ros-indigo
+#./configure --enable-ros --with-hark-inc=/usr/include/hark/
+#make -j8
+#sudo make install
 
 #sudo apt-get install hark-ros-indigo
 
