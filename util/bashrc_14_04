@@ -190,5 +190,6 @@ alias ga='ssh georgia.hsi.gatech.edu -ldpark8'
 alias hark='node ~/hark/hark-designer/app.js'
 
 
+alias hk='cd ~/hark/hark-designer/userdata/networks'
 alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'

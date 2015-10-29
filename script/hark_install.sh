@@ -66,6 +66,7 @@ export FLOWDESIGNER_PATH=/usr/local/lib:$FLOWDESIGNER_PATH
 # sudo ln -s /usr/local/lib/flowdesigner/toolbox/hark-ros hark-ros
 ## 2. If no sound card error 
 # add current user into audio group
+# sudo usermod -a -G audio username
 ## 3. libroscpp.so no such file or dir
 # Reboot
 ## 4. Undefined symbol err from hark-ros
