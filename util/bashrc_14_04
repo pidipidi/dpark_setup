@@ -117,6 +117,10 @@ fi
 source /opt/ros/indigo/setup.bash
 #source ~/catkin_ws/devel/setup.bash
 #source ~/rosbuild_ws/setup.bash
+source ~/catkin_ws/devel_isolated/setup.bash
+
+alias indigo='source /opt/ros/indigo/setup.bash'
+alias hydro='source ~/ros_hydro/install/setup.bash'
 
 # git 
 source ~/git-completion.bash 
@@ -193,3 +197,5 @@ alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
 alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
+
+alias hd='source ~/ros_hydro/devel/setup.bash'
