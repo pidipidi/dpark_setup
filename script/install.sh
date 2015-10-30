@@ -39,8 +39,9 @@ source ~/.bashrc
 # kinect
 
 # util
-sudo apt-get install screen
+sudo apt-get install screen subversion chromium-browser ssh terminator
 
 # git 
 git config --global user.email "deric.park@gatech.edu"
 git config --global user.name "pidipidi"
+
