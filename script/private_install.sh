@@ -1,4 +1,4 @@
-#sudo apt-get install meld
+sudo apt-get install meld cifs-utils vpnc
 sudo apt-get install ros-indigo-urdfdom-py ros-indigo-ar-track-alvar ros-indigo-pr2-msgs ros-indigo-pr2-controllers-msgs
 
 ## git (After adding key)

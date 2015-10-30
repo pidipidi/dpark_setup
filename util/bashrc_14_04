@@ -147,20 +147,18 @@ source /home/dpark/.bashrc.hark.sh
 #export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/dpark/rosbuild_ws/hark_common_msgs
 
 # some more ls aliases
-alias pr2='ssh monty1'
+alias pr2='ssh -Y monty1'
 alias pc1='ssh -Y pr2c1'
 alias pc1d='export DISPLAY=:0.0'
-alias monty='export ROS_MASTER_URI="http://monty1.hsi.gatech.edu:11311"'
+alias monty1='export ROS_MASTER_URI="http://monty1.hsi.gatech.edu:11311"'
 alias pr2c1='export ROS_MASTER_URI="http://pr2c1.hsi.gatech.edu:11311"'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
+alias brain='export ROS_MASTER_URI="http://brain.hsi.gatech.edu:11311"'
 
-alias g='roscd sandbox_dpark_darpa_m3/gazebo_plugin'
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/Humanoids2015'
 
-alias tt='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
-alias dd='roscd sandbox_dpark_darpa_m3'
+alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
-alias wt='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/planar_robot'
 alias qq='roscd hrl_traversability_planner'
 alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
 alias ad='roscd hrl_multimodal_anomaly_detection'
