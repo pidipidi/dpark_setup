@@ -113,14 +113,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+## Run Setup Scripts --------------------------------------------
 # ROS
 source /opt/ros/indigo/setup.bash
+source ~/catkin_ws/devel_isolated/setup.bash
 #source ~/catkin_ws/devel/setup.bash
 #source ~/rosbuild_ws/setup.bash
-source ~/catkin_ws/devel_isolated/setup.bash
-
-alias indigo='source /opt/ros/indigo/setup.bash'
-alias hydro='source ~/ros_hydro/install/setup.bash'
 
 # git 
 source ~/git-completion.bash 
@@ -139,14 +137,17 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.gazebo.sh
 
 # added for hark + kinect2 script
-source /home/dpark/.bashrc.kinect2.sh
+#source /home/dpark/.bashrc.kinect2.sh
 source /home/dpark/.bashrc.hark.sh
 
-# added for sound localization
-#export PYTHONPATH=$PYTHONPATH:/home/dpark/catkin_ws/src/hrl-assistive/hrl_sound_localization/src/hrl_sound_localization
-#export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/dpark/rosbuild_ws/hark_common_msgs
 
-# some more ls aliases
+## some more aliases -------------------------------------------
+# ROS
+alias indigo='source /opt/ros/indigo/setup.bash'
+alias hydro='source ~/ros_hydro/install/setup.bash'
+alias rcd='cd ~/catkin_ws'
+
+# Robot
 alias pr2='ssh -Y monty1'
 alias pc1='ssh -Y pr2c1'
 alias pc1d='export DISPLAY=:0.0'

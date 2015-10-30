@@ -1,4 +1,6 @@
-sudo apt-get install meld cifs-utils vpnc
+sudo apt-get install meld cifs-utils vpnc 
+sudo easy_install pip
+
 sudo apt-get install ros-indigo-urdfdom-py ros-indigo-ar-track-alvar ros-indigo-pr2-msgs ros-indigo-pr2-controllers-msgs
 
 ## git (After adding key)
@@ -28,7 +30,18 @@ catkin_make_isolated --only-pkg-with-deps sandbox_dpark_darpa_m3 --merge
 catkin_make_isolated --only-pkg-with-deps hrl_anomaly_detection --merge
 
 
-
+## machine learning
+# Scipy
+sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
+# scikit learn
+sudo apt-get install build-essential python-dev python-setuptools \
+                     python-numpy python-scipy \
+                     libatlas-dev libatlas3gf-base
+sudo update-alternatives --set libblas.so.3 \
+    /usr/lib/atlas-base/atlas/libblas.so.3
+sudo update-alternatives --set liblapack.so.3 \
+    /usr/lib/atlas-base/atlas/liblapack.so.3
+sudo pip install --user --install-option="--prefix=" -U scikit-learn
 
 ## svn
 #mkdir -p ~/svn/robot1/src/projects/anomaly
