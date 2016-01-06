@@ -45,3 +45,6 @@ sudo apt-get install screen subversion chromium-browser ssh terminator
 git config --global user.email "deric.park@gatech.edu"
 git config --global user.name "pidipidi"
 
+# vpn
+cd /etc/
+sudo chmod +rx vpnc 
