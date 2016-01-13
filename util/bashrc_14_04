@@ -201,3 +201,6 @@ alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 alias hd='source ~/ros_hydro/devel/setup.bash'
+
+
+. /home/dpark/git/torch/install/bin/torch-activate

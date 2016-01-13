@@ -1,4 +1,16 @@
-# trusty
+##--------------------------------------------------------------------
+## A. Message subscription without kinect
+##--------------------------------------------------------------------
+# Hydro + precise(12.04)
+Copy all package into catkin_ws
+catkin_make_isolated --only-pkg-with-deps hark_common_msgs --merge
+
+
+##--------------------------------------------------------------------
+## B. Message subscription with kinect
+##--------------------------------------------------------------------
+
+# trusty (14.04)
 sudo sh -c 'echo "deb http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos trusty non-free\ndeb-src http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos trusty non-free" > /etc/apt/sources.list.d/hark.list'
 wget -q -O - http://winnie.kuis.kyoto-u.ac.jp/HARK/harkrepos/public.gpg | sudo apt-key add -
 sudo add-apt-repository ppa:chris-lea/node.js 
