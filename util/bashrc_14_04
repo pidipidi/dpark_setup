@@ -140,6 +140,8 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.kinect2.sh
 source /home/dpark/.bashrc.hark.sh
 
+# openvdb
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 ## some more aliases -------------------------------------------
 # ROS
@@ -155,6 +157,7 @@ alias monty1='export ROS_MASTER_URI="http://monty1.hsi.gatech.edu:11311"'
 alias pr2c1='export ROS_MASTER_URI="http://pr2c1.hsi.gatech.edu:11311"'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 alias brain='export ROS_MASTER_URI="http://brain.hsi.gatech.edu:11311"'
+alias colossus8='export ROS_MASTER_URI="http://colossus8.hsi.gatech.edu:11311"'
 
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
 

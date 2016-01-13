@@ -45,6 +45,33 @@ sudo update-alternatives --set libblas.so.3 \
 sudo update-alternatives --set liblapack.so.3 \
     /usr/lib/atlas-base/atlas/liblapack.so.3
 sudo pip install --user --install-option="--prefix=" -U scikit-learn
+# GHMM
+sudo apt-get install libxml2-dev swig python-joblib cython autoconf
+mkdir ~/svn
+cd ~/svn 
+svn checkout svn://svn.code.sf.net/p/ghmm/code/trunk/ghmm ghmm 
+cd ghmm
+./autogen.sh
+./configure
+make -j8
+sudo make install
+#PyMVPA
+cd ~/git 
+git clone https://github.com/PyMVPA/PyMVPA.git
+cd PyMVPA
+python setup.py build_ext
+sudo python setup.py install
+#OpenCV
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+cd ~/util/opencv-2.4.11/
+mkdir release
+cd release
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make -j8
+sudo make install 
+
 
 ## svn
 #mkdir -p ~/svn/robot1/src/projects/anomaly
