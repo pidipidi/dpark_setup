@@ -127,7 +127,7 @@ export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\
 # Custom 
 export ROBOT=sim
 #export DISPLAY=:0.0
-#export ROS_HOSTNAME=brain.hsi.gatech.edu
+#export ROS_HOSTNAME=brain.bme.gatech.edu
 export ROS_MASTER_URI=http://localhost:11311
 
 # added by the HRL lab install script
@@ -153,11 +153,11 @@ alias rcd='cd ~/catkin_ws'
 alias pr2='ssh -Y monty1'
 alias pc1='ssh -Y pr2c1'
 alias pc1d='export DISPLAY=:0.0'
-alias monty1='export ROS_MASTER_URI="http://monty1.hsi.gatech.edu:11311"'
-alias pr2c1='export ROS_MASTER_URI="http://pr2c1.hsi.gatech.edu:11311"'
+alias monty1='export ROS_MASTER_URI="http://monty1.bme.gatech.edu:11311"'
+alias pr2c1='export ROS_MASTER_URI="http://pr2c1.bme.gatech.edu:11311"'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
-alias brain='export ROS_MASTER_URI="http://brain.hsi.gatech.edu:11311"'
-alias colossus8='export ROS_MASTER_URI="http://colossus8.hsi.gatech.edu:11311"'
+alias brain='export ROS_MASTER_URI="http://brain.bme.gatech.edu:11311"'
+alias colossus8='export ROS_MASTER_URI="http://colossus8.bme.gatech.edu:11311"'
 
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
 
@@ -173,20 +173,20 @@ alias hrl_umount='sudo umount hrl_file_server -l'
 alias vpn='sudo vpnc /etc/vpnc/gatech.conf'
 alias unvpn='sudo vpnc-disconnect'
 
-alias c1='ssh dpark@colossus.hsi.gatech.edu'
-alias c2='ssh dpark@colossus2.hsi.gatech.edu'
-alias c3='ssh dpark@colossus3.hsi.gatech.edu'
-alias c5='ssh dpark@colossus5.hsi.gatech.edu'
-alias c6='ssh dpark@colossus6.hsi.gatech.edu'
-alias c7='ssh dpark@colossus7.hsi.gatech.edu'
-alias c8='ssh dpark@colossus8.hsi.gatech.edu'
-alias c9='ssh dpark@colossus9.hsi.gatech.edu'
-alias c10='ssh dpark@colossus10.hsi.gatech.edu'
-alias c11='ssh dpark@colossus11.hsi.gatech.edu'
-alias c12='ssh dpark@colossus12.hsi.gatech.edu'
-alias c13='ssh dpark@colossus13.hsi.gatech.edu'
-alias c14='ssh dpark@colossus14.hsi.gatech.edu'
-alias ep='ssh dpark@epicac.hsi.gatech.edu'
+alias c1='ssh dpark@colossus.bme.gatech.edu'
+alias c2='ssh dpark@colossus2.bme.gatech.edu'
+alias c3='ssh dpark@colossus3.bme.gatech.edu'
+alias c5='ssh dpark@colossus5.bme.gatech.edu'
+alias c6='ssh dpark@colossus6.bme.gatech.edu'
+alias c7='ssh dpark@colossus7.bme.gatech.edu'
+alias c8='ssh dpark@colossus8.bme.gatech.edu'
+alias c9='ssh dpark@colossus9.bme.gatech.edu'
+alias c10='ssh dpark@colossus10.bme.gatech.edu'
+alias c11='ssh dpark@colossus11.bme.gatech.edu'
+alias c12='ssh dpark@colossus12.bme.gatech.edu'
+alias c13='ssh dpark@colossus13.bme.gatech.edu'
+alias c14='ssh dpark@colossus14.bme.gatech.edu'
+alias ep='ssh dpark@epicac.bme.gatech.edu'
 
 alias pippin='ssh meka@143.215.230.242'
 
