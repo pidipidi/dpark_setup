@@ -61,7 +61,11 @@ cd release
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
 make -j8
 sudo make install 
-
+# python_speech_features for mfcc extraction
+cd ~/git 
+git clone https://github.com/jameslyons/python_speech_features.git
+cd python_speech_features
+sudo python setup.py install
 
 ## svn
 #mkdir -p ~/svn/robot1/src/projects/anomaly
