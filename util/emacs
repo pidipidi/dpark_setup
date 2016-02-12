@@ -111,3 +111,6 @@
 
 ;; Disable C-z
 (global-unset-key (kbd "C-z"))
+
+;; (define-key map (kbd "TAB") 'py-indent-or-complete)
+(define-key map (kbd "TAB") 'py-indent-line)
