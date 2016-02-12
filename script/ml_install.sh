@@ -13,6 +13,7 @@ sudo update-alternatives --set liblapack.so.3 \
 sudo pip install --user --install-option="--prefix=" -U scikit-learn
 
 #PyMVPA
+sudo apt-get install swig
 cd ~/git 
 git clone https://github.com/PyMVPA/PyMVPA.git
 cd PyMVPA
