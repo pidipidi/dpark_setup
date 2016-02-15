@@ -165,7 +165,7 @@ alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
 alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
-alias ad='roscd hrl_multimodal_anomaly_detection'
+alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
 
 alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
 alias hrl_umount='sudo umount hrl_file_server -l'
@@ -187,6 +187,7 @@ alias c12='ssh dpark@colossus12.bme.gatech.edu'
 alias c13='ssh dpark@colossus13.bme.gatech.edu'
 alias c14='ssh dpark@colossus14.bme.gatech.edu'
 alias ep='ssh dpark@epicac.bme.gatech.edu'
+alias br='ssh dpark@brain.bme.gatech.edu'
 
 alias pippin='ssh meka@143.215.230.242'
 
