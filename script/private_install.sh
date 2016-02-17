@@ -3,7 +3,7 @@ sudo apt-get install python-openopt python-pyaudio
 ## git (After adding key)
 #cd ~/git
 cd ~/catkin_ws/src/
-#git clone git@git.hsi.gatech.edu:hrl-haptic-manip-dev
+git clone git@git.hsi.gatech.edu:hrl-haptic-manip-dev
 git clone https://github.com/gt-ros-pkg/hrl-assistive.git
 git clone https://github.com/gt-ros-pkg/hrl-lib.git
 git clone https://github.com/gt-ros-pkg/hrl-kdl.git
@@ -11,8 +11,8 @@ git clone https://github.com/gt-ros-pkg/hrl-sensor-utils.git
 git clone https://github.com/gt-ros-pkg/hrl_autobed_dev.git
 git clone https://github.com/gt-ros-pkg/hrl.git
 
-#cd ~/catkin_ws/src/hrl-haptic-manip-dev/
-#git checkout indigo-devel
+cd ~/catkin_ws/src/hrl-haptic-manip-dev/
+git checkout indigo-devel
 cd ~/catkin_ws/src/hrl-lib/
 git checkout indigo-devel
 cd ~/catkin_ws/src/hrl-sensor-utils/
