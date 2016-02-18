@@ -1,3 +1,5 @@
+sudo easy_install pip
+
 ## machine learning
 sudo apt-get install python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
 sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
