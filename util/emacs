@@ -113,4 +113,6 @@
 (global-unset-key (kbd "C-z"))
 
 ;; (define-key map (kbd "TAB") 'py-indent-or-complete)
-(define-key map (kbd "TAB") 'py-indent-line)
+;;(define-key map (kbd "TAB") 'py-indent-line)
+(define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
+(define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left)
