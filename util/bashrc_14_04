@@ -210,5 +210,5 @@ if [ "$HOSTNAME" = brain ]; then
 elif [ "$USER" = ubuntu ]; then
    export PATH=/usr/local/cuda-7.0/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
-   . /home/ubuntu/git/torch/install/bin/torch-activate
+   #. /home/ubuntu/git/torch/install/bin/torch-activate
 fi

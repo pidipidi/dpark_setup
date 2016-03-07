@@ -29,3 +29,11 @@ python setup.py build_ext
 sudo python setup.py install
 
 source ~/.bashrc 
+
+#cssvm
+cd ~/git 
+git clone https://github.com/airanmehr/cssvm.git
+cd cssvm
+./make
+cd python
+./make
