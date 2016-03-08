@@ -143,15 +143,19 @@ export ROS_MASTER_URI=http://localhost:11311
 # openvdb
 #export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
-if [ "$HOSTNAME" = brain ]; then
+if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
    export PATH=/usr/local/cuda-7.5/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
-   . /home/dpark/git/torch/install/bin/torch-activate
 elif [ "$USER" = ubuntu ]; then
    export PATH=/usr/local/cuda-7.0/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
    #. /home/ubuntu/git/torch/install/bin/torch-activate
 fi
+
+if [ "$HOSTNAME" = brain ] ; then
+   . /home/dpark/git/torch/install/bin/torch-activate
+fi
+
 
 ## some more aliases -------------------------------------------
 # ROS
