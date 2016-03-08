@@ -24,6 +24,7 @@ git checkout hydro-devel
 
 # compile
 cd ~/catkin_ws/
+catkin_init_workspace
 catkin_make_isolated --only-pkg-with-deps hrl_kdl --merge
 catkin_make_isolated --only-pkg-with-deps hrl_haptic_mpc --merge
 catkin_make_isolated --only-pkg-with-deps sandbox_dpark_darpa_m3 --merge
