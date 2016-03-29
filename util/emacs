@@ -111,3 +111,9 @@
 
 ;; Disable C-z
 (global-unset-key (kbd "C-z"))
+
+;; lua
+(add-to-list 'load-path "~/util/immerrr-lua-mode-bdf121b/lua-mode-el/resides")
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
