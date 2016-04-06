@@ -116,3 +116,10 @@
 ;;(define-key map (kbd "TAB") 'py-indent-line)
 (define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
 (define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left)
+
+;; lua
+(add-to-list 'load-path "~/util/immerrr-lua-mode-bdf121b/lua-mode-el/resides")
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
