@@ -141,11 +141,14 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.hark.sh
 
 # openvdb
-#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
+# camera
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
    export PATH=/usr/local/cuda-7.5/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
+   export TORCH_DIR=$HOME/git/torch
 elif [ "$USER" = ubuntu ]; then
    export PATH=/usr/local/cuda-7.0/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
