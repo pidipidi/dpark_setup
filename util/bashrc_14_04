@@ -138,16 +138,36 @@ export ROS_MASTER_URI=http://localhost:11311
 
 # added for hark + kinect2 script
 #source /home/dpark/.bashrc.kinect2.sh
-source /home/dpark/.bashrc.hark.sh
+#source /home/dpark/.bashrc.hark.sh
 
 # openvdb
-#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
+# camera
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
+   export PATH=/usr/local/cuda-7.5/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
+   export TORCH_DIR=$HOME/git/torch
+elif [ "$USER" = ubuntu ]; then
+   export PATH=/usr/local/cuda-7.0/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+   #. /home/ubuntu/git/torch/install/bin/torch-activate
+fi
+
+if [ "$HOSTNAME" = brain ] ; then
+   . /home/dpark/git/torch/install/bin/torch-activate
+fi
+
 
 ## some more aliases -------------------------------------------
 # ROS
 alias indigo='source /opt/ros/indigo/setup.bash'
 alias hydro='source ~/ros_hydro/install/setup.bash'
 alias rcd='cd ~/catkin_ws'
+alias hd='source ~/ros_hydro/devel/setup.bash'
+alias devel='source ~/catkin_ws/devel/setup.bash'
+alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 # Robot
 alias pr2='ssh -Y monty1'
@@ -159,49 +179,31 @@ alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 alias brain='export ROS_MASTER_URI="http://brain.bme.gatech.edu:11311"'
 alias colossus8='export ROS_MASTER_URI="http://colossus8.bme.gatech.edu:11311"'
 
+# location
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
-
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
 alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
 alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
 
+# mount
 alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
 alias hrl_umount='sudo umount hrl_file_server -l'
 
+# vpn
 alias vpn='sudo vpnc /etc/vpnc/gatech.conf'
 alias unvpn='sudo vpnc-disconnect'
 
-alias c1='ssh dpark@colossus.bme.gatech.edu'
-alias c2='ssh dpark@colossus2.bme.gatech.edu'
-alias c3='ssh dpark@colossus3.bme.gatech.edu'
-alias c5='ssh dpark@colossus5.bme.gatech.edu'
-alias c6='ssh dpark@colossus6.bme.gatech.edu'
-alias c7='ssh dpark@colossus7.bme.gatech.edu'
-alias c8='ssh dpark@colossus8.bme.gatech.edu'
-alias c9='ssh dpark@colossus9.bme.gatech.edu'
-alias c10='ssh dpark@colossus10.bme.gatech.edu'
-alias c11='ssh dpark@colossus11.bme.gatech.edu'
-alias c12='ssh dpark@colossus12.bme.gatech.edu'
-alias c13='ssh dpark@colossus13.bme.gatech.edu'
-alias c14='ssh dpark@colossus14.bme.gatech.edu'
-alias ep='ssh dpark@epicac.bme.gatech.edu'
+# ssh
+alias c8='ssh -X dpark@colossus8.bme.gatech.edu'
+alias c11='ssh -X dpark@colossus11.bme.gatech.edu'
+alias c12='ssh -X dpark@colossus12.bme.gatech.edu'
+alias ep='ssh -X dpark@epicac.bme.gatech.edu'
 alias br='ssh -X dpark@brain.bme.gatech.edu'
-
 alias pippin='ssh meka@143.215.230.242'
-
 alias ga='ssh georgia.hsi.gatech.edu -ldpark8'
 
-# hark
-alias hark='node ~/hark/hark-designer/app.js'
 
-
+#alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
-alias devel='source ~/catkin_ws/devel/setup.bash'
-alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
-
-alias hd='source ~/ros_hydro/devel/setup.bash'
-
-
-. /home/dpark/git/torch/install/bin/torch-activate

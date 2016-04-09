@@ -1,3 +1,5 @@
+sudo easy_install pip
+
 ## machine learning
 sudo apt-get install python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
 sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
@@ -6,6 +8,7 @@ sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
 sudo apt-get install build-essential python-dev python-setuptools \
                      libatlas-dev libatlas3gf-base
 sudo apt-get install python-numpy python-scipy 
+source ~/.bashrc 
 
 sudo update-alternatives --set libblas.so.3 /usr/lib/atlas-base/atlas/libblas.so.3
 sudo update-alternatives --set liblapack.so.3 /usr/lib/atlas-base/atlas/liblapack.so.3
@@ -15,13 +18,27 @@ sudo pip install scipy --upgrade
 
 sudo pip install --user --install-option="--prefix=" -U scikit-learn
 
-#PyMVPA2
-#sudo apt-get install 
+#PyMVPA??
+sudo apt-get install swig
 
-#movpa?
+#PyMVPA
 cd ~/git 
 git clone https://github.com/PyMVPA/PyMVPA.git
 cd PyMVPA
 python setup.py build_ext
 sudo python setup.py install
 
+source ~/.bashrc 
+
+#cssvm (github code has path bug. Please copy my local one.)
+sudo apt-get install python-libsvm
+#cd ~/git 
+#git clone https://github.com/airanmehr/cssvm.git
+#cd cssvm
+#./make
+#cd python
+#./make
+
+#
+sudo easy_install starcluster
+sudo pip install dill
