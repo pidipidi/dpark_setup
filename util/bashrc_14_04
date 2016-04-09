@@ -187,7 +187,7 @@ alias c12='ssh dpark@colossus12.bme.gatech.edu'
 alias c13='ssh dpark@colossus13.bme.gatech.edu'
 alias c14='ssh dpark@colossus14.bme.gatech.edu'
 alias ep='ssh dpark@epicac.bme.gatech.edu'
-alias br='ssh dpark@brain.bme.gatech.edu'
+alias br='ssh -X dpark@brain.bme.gatech.edu'
 
 alias pippin='ssh meka@143.215.230.242'
 
