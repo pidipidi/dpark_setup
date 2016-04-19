@@ -172,6 +172,7 @@ alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 # Robot
 alias pr2='ssh -Y monty1'
 alias pc1='ssh -Y pr2c1'
+alias pr2l='ssh -X dpark@10.68.0.1'
 alias pc1d='export DISPLAY=:0.0'
 alias monty1='export ROS_MASTER_URI="http://monty1.bme.gatech.edu:11311"'
 alias pr2c1='export ROS_MASTER_URI="http://pr2c1.bme.gatech.edu:11311"'
@@ -203,7 +204,6 @@ alias ep='ssh -X dpark@epicac.bme.gatech.edu'
 alias br='ssh -X dpark@brain.bme.gatech.edu'
 alias pippin='ssh meka@143.215.230.242'
 alias ga='ssh georgia.hsi.gatech.edu -ldpark8'
-
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
