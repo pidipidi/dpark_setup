@@ -171,10 +171,10 @@ alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 # Robot
 alias pr2='ssh -Y monty1'
-alias pc1='ssh -Y pr2c1'
+alias pc1='ssh -Y pr2c1wan.bme.gatech.edu'
 alias pc1d='export DISPLAY=:0.0'
 alias monty1='export ROS_MASTER_URI="http://monty1.bme.gatech.edu:11311"'
-alias pr2c1='export ROS_MASTER_URI="http://pr2c1.bme.gatech.edu:11311"'
+alias pr2c1='export ROS_MASTER_URI="http://pr2c1wan.bme.gatech.edu:11311"'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 alias brain='export ROS_MASTER_URI="http://brain.bme.gatech.edu:11311"'
 alias colossus8='export ROS_MASTER_URI="http://colossus8.bme.gatech.edu:11311"'
@@ -188,7 +188,8 @@ alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
 alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
 
 # mount
-alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
+#alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
+alias hrl_mount='sudo mount -t cifs //ad.gatech.edu/bme/labs/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,noperm,sec=ntlm' 
 alias hrl_umount='sudo umount hrl_file_server -l'
 
 # vpn
