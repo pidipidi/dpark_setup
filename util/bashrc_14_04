@@ -159,6 +159,14 @@ if [ "$HOSTNAME" = brain ] ; then
    . /home/dpark/git/torch/install/bin/torch-activate
 fi
 
+if [ "$HOSTNAME" = pr2c1 ] ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+fi
+if [ "$HOSTNAME" = pr2c2 ] ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+   export ROS_MASTER_URI=http://10.68.0.1:11311
+fi
+
 
 ## some more aliases -------------------------------------------
 # ROS
