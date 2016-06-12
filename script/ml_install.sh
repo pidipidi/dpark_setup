@@ -16,7 +16,9 @@ sudo update-alternatives --set liblapack.so.3 /usr/lib/atlas-base/atlas/liblapac
 sudo -H pip install numpy --upgrade
 sudo -H pip install scipy --upgrade
 
-sudo -H pip install --user --install-option="--prefix=" -U scikit-learn
+# for amazon cloud?
+#sudo -H pip install --user --install-option="--prefix=" -U scikit-learn
+sudo -H pip install --install -U scikit-learn
 
 #PyMVPA??
 sudo apt-get install swig
