@@ -140,6 +140,9 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.kinect2.sh
 #source /home/dpark/.bashrc.hark.sh
 
+# git
+export GIT_SSL_NO_VERIFY=1
+
 # openvdb
 #export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
 # camera
