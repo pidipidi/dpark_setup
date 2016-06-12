@@ -18,7 +18,7 @@ sudo -H pip install scipy --upgrade
 
 # for amazon cloud?
 #sudo -H pip install --user --install-option="--prefix=" -U scikit-learn
-sudo -H pip install --install -U scikit-learn
+sudo -H pip install scikit-learn
 
 #PyMVPA??
 sudo apt-get install swig
