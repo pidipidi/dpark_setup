@@ -13,10 +13,12 @@ source ~/.bashrc
 sudo update-alternatives --set libblas.so.3 /usr/lib/atlas-base/atlas/libblas.so.3
 sudo update-alternatives --set liblapack.so.3 /usr/lib/atlas-base/atlas/liblapack.so.3
 
-sudo pip install numpy --upgrade
-sudo pip install scipy --upgrade
+sudo -H pip install numpy --upgrade
+sudo -H pip install scipy --upgrade
 
-sudo pip install --user --install-option="--prefix=" -U scikit-learn
+# for amazon cloud?
+#sudo -H pip install --user --install-option="--prefix=" -U scikit-learn
+sudo -H pip install scikit-learn
 
 #PyMVPA??
 sudo apt-get install swig
@@ -39,6 +41,8 @@ sudo apt-get install python-libsvm
 #cd python
 #./make
 
-#
+# for star cluster
+sudo apt-get update
+sudo apt-get install libffi-dev g++ libssl-dev
 sudo easy_install starcluster
 sudo pip install dill

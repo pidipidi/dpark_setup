@@ -140,6 +140,9 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.kinect2.sh
 #source /home/dpark/.bashrc.hark.sh
 
+# git
+export GIT_SSL_NO_VERIFY=1
+
 # openvdb
 #export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
 # camera
@@ -157,6 +160,14 @@ fi
 
 if [ "$HOSTNAME" = brain ] ; then
    . /home/dpark/git/torch/install/bin/torch-activate
+fi
+
+if [ "$HOSTNAME" = pr2c1 ] ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+fi
+if [ "$HOSTNAME" = pr2c2 ] ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+   export ROS_MASTER_URI=http://10.68.0.1:11311
 fi
 
 
@@ -204,8 +215,8 @@ alias c11='ssh -X dpark@colossus11.bme.gatech.edu'
 alias c12='ssh -X dpark@colossus12.bme.gatech.edu'
 alias ep='ssh -X dpark@epicac.bme.gatech.edu'
 alias br='ssh -X dpark@brain.bme.gatech.edu'
+alias ba='ssh -X dpark@baymax.bme.gatech.edu'
 alias pippin='ssh meka@143.215.230.242'
-alias ga='ssh georgia.hsi.gatech.edu -ldpark8'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
