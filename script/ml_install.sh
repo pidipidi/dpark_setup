@@ -40,5 +40,5 @@ sudo apt-get install python-libsvm
 #./make
 
 #
-sudo easy_install starcluster
-sudo pip install dill
+#sudo easy_install starcluster
+#sudo pip install dill
