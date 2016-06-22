@@ -171,6 +171,9 @@ if [ "$HOSTNAME" = pr2c2 ] ; then
    export ROS_MASTER_URI=http://10.68.0.1:11311
 fi
 
+# pip
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
+
 
 ## some more aliases -------------------------------------------
 # ROS
@@ -182,11 +185,11 @@ alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 # Robot
-alias pr2='ssh -Y monty1'
-alias pc1='ssh -Y pr2c1'
+alias pr2='ssh -Y monty1.bme.gatech.edu'
+alias pc1='ssh -Y pr2c1wan.bme.gatech.edu'
 alias pr2l='ssh -X dpark@10.68.0.1'
 alias pr2m='export ROS_MASTER_URI="http://monty1.bme.gatech.edu:11311"'
-alias pc1m='export ROS_MASTER_URI="http://pr2c1.bme.gatech.edu:11311"'
+alias pc1m='export ROS_MASTER_URI="http://pr2c1wan.bme.gatech.edu:11311"'
 alias pr2lm='export ROS_MASTER_URI="http://10.68.0.1:11311"'
 alias pc1d='export DISPLAY=:0.0'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
@@ -219,6 +222,7 @@ alias ep='ssh -X dpark@epicac.bme.gatech.edu'
 alias br='ssh -X dpark@brain.bme.gatech.edu'
 alias ba='ssh -X dpark@baymax.bme.gatech.edu'
 alias pippin='ssh meka@143.215.230.242'
+alias bap='ssh -X administrator@143.215.225.192'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
