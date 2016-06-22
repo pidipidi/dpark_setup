@@ -170,6 +170,9 @@ if [ "$HOSTNAME" = pr2c2 ] ; then
    export ROS_MASTER_URI=http://10.68.0.1:11311
 fi
 
+# pip
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
+
 
 ## some more aliases -------------------------------------------
 # ROS
