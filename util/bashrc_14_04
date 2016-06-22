@@ -164,6 +164,7 @@ fi
 
 if [ "$HOSTNAME" = pr2c1 ] ; then
    source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+   export ROS_ENV_LOADER=/etc/ros/env.sh
 fi
 if [ "$HOSTNAME" = pr2c2 ] ; then
    source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
@@ -191,6 +192,7 @@ alias pc1d='export DISPLAY=:0.0'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 alias brain='export ROS_MASTER_URI="http://brain.bme.gatech.edu:11311"'
 alias colossus8='export ROS_MASTER_URI="http://colossus8.bme.gatech.edu:11311"'
+alias bp='ssh administrator@10.68.0.103'
 
 # location
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
@@ -220,3 +222,4 @@ alias pippin='ssh meka@143.215.230.242'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
+export KINECT2=true
