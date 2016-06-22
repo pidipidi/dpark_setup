@@ -217,6 +217,7 @@ alias ep='ssh -X dpark@epicac.bme.gatech.edu'
 alias br='ssh -X dpark@brain.bme.gatech.edu'
 alias ba='ssh -X dpark@baymax.bme.gatech.edu'
 alias pippin='ssh meka@143.215.230.242'
+alias bap='ssh -X administrator@143.215.225.192'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
