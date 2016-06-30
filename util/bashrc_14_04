@@ -162,7 +162,7 @@ if [ "$HOSTNAME" = brain ] ; then
    . /home/dpark/git/torch/install/bin/torch-activate
 fi
 
-if [ "$HOSTNAME" = pr2c1 ] ; then
+if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
    source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
    export ROS_ENV_LOADER=/etc/ros/env.sh
 fi
