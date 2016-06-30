@@ -16,11 +16,11 @@ git checkout indigo-devel
 cd ~/catkin_ws/src/hrl-lib/
 git checkout indigo-devel
 cd ~/catkin_ws/src/hrl-sensor-utils/
-git checkout hydro-devel
+git checkout indigo-devel
 cd ~/catkin_ws/src/hrl-assistive/
 git checkout indigo-devel
 cd ~/catkin_ws/src/hrl/
-git checkout hydro-devel
+git checkout indigo-devel
 
 # compile
 cd ~/catkin_ws/
