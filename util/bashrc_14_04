@@ -185,11 +185,7 @@ alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 # Robot
-<<<<<<< HEAD
-alias pr2='ssh -Y monty1'
-=======
 alias pr2='ssh -Y monty1wan.bme.gatech.edu'
->>>>>>> f23e30b84797bdd2cddd14c17083b07db8f31f00
 alias pc1='ssh -Y pr2c1wan.bme.gatech.edu'
 alias pr2l='ssh -X dpark@10.68.0.1'
 alias pr2m='export ROS_MASTER_URI="http://monty1wan.bme.gatech.edu:11311"'
