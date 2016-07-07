@@ -113,16 +113,25 @@ if ! shopt -oq posix; then
   fi
 fi
 
+## for Robot
+if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+fi
+if [ "$HOSTNAME" = pr2c2 ] ; then
+   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
+   export ROS_MASTER_URI=http://10.68.0.1:11311
+fi
+
+
 ## Run Setup Scripts --------------------------------------------
 # ROS
 source /opt/ros/indigo/setup.bash
 source ~/catkin_ws/devel_isolated/setup.bash
-#source ~/catkin_ws/devel/setup.bash
-#source ~/rosbuild_ws/setup.bash
 
 # git 
 source ~/git-completion.bash 
 export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\%s)")\[\e[0m\]>' 
+export GIT_SSL_NO_VERIFY=1
 
 # Custom 
 export ROBOT=sim
@@ -140,14 +149,12 @@ export ROS_MASTER_URI=http://localhost:11311
 #source /home/dpark/.bashrc.kinect2.sh
 #source /home/dpark/.bashrc.hark.sh
 
-# git
-export GIT_SSL_NO_VERIFY=1
-
 # openvdb
 #export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
 # camera
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
+# CUDA
 if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
    export PATH=/usr/local/cuda-7.5/bin:$PATH
    export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
@@ -158,17 +165,9 @@ elif [ "$USER" = ubuntu ]; then
    #. /home/ubuntu/git/torch/install/bin/torch-activate
 fi
 
+# TORCH
 if [ "$HOSTNAME" = brain ] ; then
    . /home/dpark/git/torch/install/bin/torch-activate
-fi
-
-if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
-   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
-   export ROS_ENV_LOADER=/etc/ros/env.sh
-fi
-if [ "$HOSTNAME" = pr2c2 ] ; then
-   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
-   export ROS_MASTER_URI=http://10.68.0.1:11311
 fi
 
 # pip
@@ -226,4 +225,3 @@ alias bap='ssh -X administrator@143.215.225.192'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
-export KINECT2=true
