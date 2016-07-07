@@ -1,5 +1,5 @@
 sudo apt-get install screen subversion chromium-browser ssh terminator
-sudo apt-get install emacs meld cifs-utils vpnc 
+sudo apt-get install emacs meld cifs-utils vpnc nfs-common
 sudo easy_install pip
 
 mkdir ~/util

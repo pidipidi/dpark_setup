@@ -19,12 +19,9 @@ source ~/.bashrc
 
 # 3: ml
 ./ml_install.sh
-./ghmm_install.sh
+./ml_ghmm_install.sh
 
 # 4: repositories
-./private_install.sh
-
-# 5: svn
+./ros_git_install.sh
 ./svn_install.sh
 
-# 6: torch

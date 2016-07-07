@@ -25,7 +25,7 @@ source ~/.bashrc
 
 # 3: ml
 ./ml_install.sh
-./ghmm_install.sh
+./ml_ghmm_install.sh
 
 # 4: repositories
-./private_install.sh
+./ros_git_install.sh
