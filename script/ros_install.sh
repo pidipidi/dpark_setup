@@ -17,5 +17,5 @@ cd ~/catkin_ws/
 catkin_make
 source ~/.bashrc
 
-sudo apt-get install ros-indigo-urdfdom-py ros-indigo-ar-track-alvar ros-indigo-pr2-msgs ros-indigo-pr2-controllers-msgs ros-indigo-pr2-kinematics ros-indigo-sound-play
+sudo apt-get install ros-indigo-urdfdom-py ros-indigo-ar-track-alvar ros-indigo-pr2-msgs ros-indigo-pr2-controllers-msgs ros-indigo-pr2-kinematics ros-indigo-sound-play ros-indigo-manipulation-msgs
 source ~/.bashrc 
