@@ -137,7 +137,11 @@ export GIT_SSL_NO_VERIFY=1
 export ROBOT=sim
 #export DISPLAY=:0.0
 #export ROS_HOSTNAME=brain.bme.gatech.edu
-export ROS_MASTER_URI=http://localhost:11311
+if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
+   export ROS_MASTER_URI=http://c1:11311
+else
+   export ROS_MASTER_URI=http://localhost:11311
+fi
 
 # added by the HRL lab install script
 #source /home/dpark/.bashrc.hrl.sh
