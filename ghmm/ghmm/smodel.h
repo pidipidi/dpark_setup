@@ -86,12 +86,14 @@ extern "C" {
     union {
       double val;
       double *vec;
+      double *vec_m_k; // dpark for online hmm
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */
     union {
       double val;
       double *mat;
+      double *mat_v_kk; // dpark for online hmm
     } variance;
     /** pointer to inverse of covariance matrix if multivariate normal
         else NULL */
@@ -147,6 +149,8 @@ extern "C" {
   int xPosition;
   /** y coordinate position for graph representation plotting **/
   int yPosition;
+  /** online baum-welch params for transition matrix (dpark) **/
+  double **n_ij
   } ghmm_cstate;
 
   struct ghmm_cmodel;

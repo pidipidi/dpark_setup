@@ -83,6 +83,16 @@ extern "C" {
   */
   int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs);
 
+/**
+  Online Baum-Welch Algorithm for SHMMs (Under development).
+  Training of model parameter with multiple double sequences (incl. scaling).
+  New parameters set directly in hmm (no storage of previous values!). Matrices
+  are allocated with stat_matrix_d_alloc.
+  @return            0/-1 success/error
+  @param cs         initial model and train sequences
+  */
+  int ghmm_cmodel_baum_welch_online (ghmm_cmodel_baum_welch_context * cs);
+
 
 #ifdef __cplusplus
 }

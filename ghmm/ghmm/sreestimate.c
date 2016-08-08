@@ -628,6 +628,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
     }
 
 
+    /* Update alpha and beta given the model */
     if ((ghmm_cmodel_forward (smo, O[k], T[k], b, alpha, scale, &log_p_k) == -1) ||
         (ghmm_cmodel_backward (smo, O[k], T[k], b, beta, scale) == -1)) {
 #if MCI
@@ -731,7 +732,6 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
           /*  c_im * b_im  */
 
 
-
           f_im = b[t][i][m];
           gamma = seq_w[k] * sum_alpha_a_ji * f_im * beta[t][i];
           gamma_ct = gamma * c_t;       /* c[t] = 1/scale[t] */
@@ -777,13 +777,14 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
     smo->class_change->k = -1;
   }
 
-
+  
   if (valid_parameter) {
     /* new parameter lambda: set directly in model */
     if (sreestimate_setlambda (r, smo) == -1) {
       GHMM_LOG_QUEUED(LCONVERTED);
       return (-1);
     }
+
     /* only test : */
 
     
@@ -918,6 +919,11 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
     }
 
   }                             /* while (n <= MAX_ITER_BW) */
+
+
+  /* save online baum-welch params n,m (dpark temp)*/
+  sreestimate_set_online_params(r)
+
 
 #if MCI
   ighmm_mes (MESINFO, "%8.5f (-log_p optimized smodel)\n", -log_p);
