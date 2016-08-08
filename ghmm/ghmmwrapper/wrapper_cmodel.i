@@ -202,17 +202,20 @@ typedef struct ghmm_cmodel_class_change_context {
   /** leave reestimation loop if diff. between successive logp values 
       is smaller than eps */
     double eps;
-  /** max. no of iterations */
+    /** max. no of iterations */
     int max_iter;
+    /** flag for online baum-welch (dpark) */
+    bool obw;
   } ghmm_cmodel_baum_welch_context;
 
 %extend ghmm_cmodel_baum_welch_context{
-        ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd)
+    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, bool obw)
         {
                 ghmm_cmodel_baum_welch_context *bwc = malloc(sizeof(ghmm_cmodel_baum_welch_context));
                 bwc->smo = smo;
                 bwc->sqd = sqd;
                 bwc->logp = malloc(sizeof(*bwc->logp));
+                bwc->obw  = obw;
                 return bwc;
         }
         ~ghmm_cmodel_baum_welch_context() {

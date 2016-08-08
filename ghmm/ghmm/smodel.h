@@ -41,6 +41,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "ghmm.h"
 #include "scanner.h"
@@ -86,14 +87,15 @@ extern "C" {
     union {
       double val;
       double *vec;
-      double *vec_m_k; // dpark for online hmm
+      double *vec_num;   // the numerator of vec for online hmm (dpark)
+      double u_denom; // the denumerator of vec for online hmm (dpark)
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */
     union {
       double val;
       double *mat;
-      double *mat_v_kk; // dpark for online hmm
+      double *mat_num;   // the numerator of mat for online hmm (dpark)
     } variance;
     /** pointer to inverse of covariance matrix if multivariate normal
         else NULL */
@@ -149,8 +151,9 @@ extern "C" {
   int xPosition;
   /** y coordinate position for graph representation plotting **/
   int yPosition;
-  /** online baum-welch params for transition matrix (dpark) **/
-  double **n_ij
+  /** the numerator to compute transition probs from predecessor states 
+      for online baum-welch (dpark) **/
+  double **out_a_num; 
   } ghmm_cstate;
 
   struct ghmm_cmodel;

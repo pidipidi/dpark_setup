@@ -115,8 +115,9 @@ int ghmm_cstate_alloc (ghmm_cstate * s,
    
   if (out_states > 0) {
     ARRAY_CALLOC (s->out_id, out_states);
-    s->out_a = ighmm_cmatrix_alloc (cos, out_states);
-    if (!s->out_a) {
+    s->out_a     = ighmm_cmatrix_alloc (cos, out_states);
+    s->out_a_num = ighmm_cmatrix_alloc (cos, out_states); // dpark
+    if (!s->out_a || !s->out_a_num) {
       GHMM_LOG_QUEUED(LCONVERTED);
       goto STOP;
     }
@@ -204,8 +205,9 @@ since it does not take care of het .mixtures densities  */
         return (-1);
       }
       smo->s[index].out_id[count_out] = i;
-      for (c = 0; c < smo->cos; c++)
+      for (c = 0; c < smo->cos; c++){
         smo->s[index].out_a[c][count_out] = a_matrix[c][index][i];
+      }
       count_out++;
     }
     exist = 0;
