@@ -32,7 +32,7 @@ if False:
 nEmissionDim = 2
 nState       = 20
 F = ghmm.Float()
-cov_mult = [1.0]*(nEmissionDim**2)
+cov_mult = [0.3]*(nEmissionDim**2)
 
 
 
@@ -62,9 +62,9 @@ X_train = util.convert_sequence(X) # Training input
 X_train = X_train.tolist()
 print "training data size: ", np.shape(X_train)
 
-## ml.cmodel.getState(0).setOutNum(0, 0, 0.8)
-## print ml.cmodel.getState(0).getOutNum(0, 0)
-## print "0-----------------------"
+## ml.cmodel.getState(0).setUdenom(0, 0.8)
+print ml.cmodel.getState(0).getEmission(0).getMeanVec()
+print "0-----------------------"
 
 final_seq = ghmm.SequenceSet(F, X_train)
 print 'Run Baum Welch method with (samples, length)', np.shape(X_train)

@@ -132,6 +132,7 @@ typedef struct ghmm_cstate {
         void   setStdDev(size_t i, double value)        { self->e[i].variance.val = value; }
         void      setMin(size_t i, double value)        { self->e[i].min       = value; }
         void      setMax(size_t i, double value)        { self->e[i].max       = value; }
+        void     setUdenom(size_t i, double value)      { self->e[i].mean.u_denom  = value; }
 
         ghmm_density_t getDensity(size_t i) { return self->e[i].type; }
         double          getWeight(size_t i) { return self->c[i]; }
@@ -139,6 +140,7 @@ typedef struct ghmm_cstate {
         double          getStdDev(size_t i) { return self->e[i].variance.val; }
         double             setMin(size_t i) { return self->e[i].min; }
         double             setMax(size_t i) { return self->e[i].max; }
+        double            getUdenom(size_t i) { return self->e[i].mean.u_denom; }
 
 
         int getInState(size_t index) { return self->in_id[index]; }

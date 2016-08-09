@@ -210,22 +210,26 @@ static int sreestimate_init (local_store_t * r, const ghmm_cmodel * smo)
     r->pi_num[i] = 0.0;
     for (osc = 0; osc < smo->cos; osc++) {
       r->a_denom[i][osc] = 0.0;
-      for (j = 0; j < smo->s[i].out_states; j++)
-        r->a_num[i][osc][j] = 0.0;
+      for (j = 0; j < smo->s[i].out_states; j++){
+          r->a_num[i][osc][j] = 0.0;
+      }
     }
+
     r->c_denom[i] = 0.0;
     for (m = 0; m < smo->s[i].M; m++) {
-      for (j = 0; j < smo->dim; j++)
-        r->mue_num[i][m][j] = 0.0;
-
-      for (j = 0; j < dim_2; j++)
-        r->u_num[i][m][j] = 0.0;
+        for (j = 0; j < smo->dim; j++){
+            r->mue_num[i][m][j] = 0.0;
+        }
+        
+        for (j = 0; j < dim_2; j++)
+            r->u_num[i][m][j] = 0.0;
 
       r->c_num[i][m] = 0.0;
       r->mue_u_denom[i][m] = 0.0;
       r->sum_gt_otot[i][m] = 0.0;
     }
   }
+
   return (0);
 # undef CUR_PROC
 }                               /* sreestimate_init */
@@ -294,13 +298,14 @@ static int sreestimate_precompute_b (ghmm_cmodel * smo, double *O, int T,
   /* save c_im * b_im(O_t)  directly in  b[t][i][m] */
   for (t = 0; t < T; t++)
   {
-    pos = t * smo->dim;
-    for (i = 0; i < smo->N; i++)
-      for (m = 0; m < smo->s[i].M; m++) {
-          b[t][i][m] = ghmm_cmodel_calc_cmbm(smo->s+i, m, O+pos);
-        b[t][i][smo->s[i].M] += b[t][i][m];
-      }
+      pos = t * smo->dim;
+      for (i = 0; i < smo->N; i++)
+          for (m = 0; m < smo->s[i].M; m++) {
+              b[t][i][m] = ghmm_cmodel_calc_cmbm(smo->s+i, m, O+pos);
+              b[t][i][smo->s[i].M] += b[t][i][m];
+          }
   }
+
   return (0);
 # undef CUR_PROC
 }                               /* sreestimate_precompute_b */
@@ -376,6 +381,7 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
         }
         else if (a_denom_pos){
             if (obw==1){
+                printf("online?????????????????????\n");
                 smo->s[i].out_a[osc][j]     = ((1.0-eta)*smo->s[i].out_a_num[osc][j] + eta* r->a_num[i][osc][j]) ;
             }
             else{
@@ -411,6 +417,7 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
         smo->s[j_id].in_a[osc][l] = smo->s[i].out_a[osc][j];
       }                         /* j-loop */
 
+
 #if MCI
       if (!a_num_pos && smo->s[i].out_states > 0)
         ighmm_mes (MESCONTR,
@@ -419,12 +426,13 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
 #endif
 
       if (obw==1){
+          printf("online?????????????????????\n");
           a_factor_i = 0.0;
           for (j = 0; j < smo->s[i].out_states; j++) {
               a_factor_i += smo->s[i].out_a[osc][j];
           }
           smo->s[i].out_a_num[osc][j] = smo->s[i].out_a[osc][j];
-          smo->s[i].out_a[osc][j] = smo->s[i].out_a[osc][j] / a_factor_i;
+          smo->s[i].out_a[osc][j]     = smo->s[i].out_a[osc][j] / a_factor_i;
       }
 
     }   /* osc-loop */
@@ -488,8 +496,13 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
 
       else {
         /* set mue_im */
+          
+          /* printf("%d %d \n", smo->model_type , GHMM_kMultivariate); */
+
         if (smo->model_type & GHMM_kMultivariate) {
+
             mue_u_denom = (1.0-eta)*smo->s[i].e[m].mean.u_denom + eta*r->mue_u_denom[i][m];
+            printf("aaa %f %f = %f \n", smo->s[i].e[m].mean.u_denom, r->mue_u_denom[i][m], mue_u_denom);
                 
             for (d = 0; d < smo->s[i].e[m].dimension; d++){
                 if (obw==1){
@@ -501,15 +514,23 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
                     smo->s[i].e[m].mean.vec_num[d] = r->mue_num[i][m][d]; // dpark
                 }
             }
+            printf("aaa %f %p\n", smo->s[i].e[m].mean.vec[0], (void*) &(smo->s[i].e[m].mean.u_denom));
+
             if (obw==1)
                 smo->s[i].e[m].mean.u_denom = mue_u_denom;
             else
                 smo->s[i].e[m].mean.u_denom = r->mue_u_denom[i][m]; // dpark
+
+            printf("bbb %f\n", smo->s[i].e[m].mean.vec[0]);
+
+
         }
         else {
-          smo->s[i].e[m].mean.val = r->mue_num[i][m][0] / r->mue_u_denom[i][m];
+            printf("??????????????????????????????????????????\n");
+            smo->s[i].e[m].mean.val = r->mue_num[i][m][0] / r->mue_u_denom[i][m];
         }
       }
+      printf("%f\n", smo->s[i].e[m].mean.vec[0]);
 
       /* TEST: u_denom == 0.0 ? */
       if (fabs (r->mue_u_denom[i][m]) <= DBL_MIN) {     /* < EPS_PREC ? */
@@ -553,6 +574,8 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
           smo->s[i].e[m].variance.val = u_im;
         }
       }
+
+      printf("%f\n", smo->s[i].e[m].mean.vec[0]);
 
       /* modification for truncated normal density:
          1-dim optimization for mue, calculate u directly 
@@ -604,6 +627,7 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
       }                         /* end modifikation truncated density */
 
     }                           /* for (m ..) */
+
     /* adjusting weights for fixed mixture components if necessary  */
     if (fix_flag == 1) {
       for (m = 0; m < smo->s[i].M; m++) {
@@ -619,6 +643,8 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
 #endif
 
   }                             /* for (i = 0 .. < smo->N)  */
+
+
   res = 0;
 STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
   return (res);
@@ -667,12 +693,15 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
     /* seq. is used for calculation of log_p */
     valid_logp++;
     T_k = T[k]/smo->dim;
+
+    printf("k = %d\n", k);
     /* precompute output densities */
     sreestimate_precompute_b (smo, O[k], T_k, b);
 
     if (smo->cos > 1) {
       smo->class_change->k = k;
     }
+
 
     /* Update alpha and beta given the model */
     if ((ghmm_cmodel_forward (smo, O[k], T[k], b, alpha, scale, &log_p_k) == -1) ||
@@ -791,7 +820,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
           r->mue_num[i][m][0] += (gamma_ct * O[k][pos]) / (double)seq_number; // dpark
           if (smo->model_type & GHMM_kMultivariate) {
             for (d = 1; d < state->e[m].dimension; d++)
-              r->mue_num[i][m][d] += (gamma_ct * O[k][pos+d]) / (double)seq_number; // dpark
+                r->mue_num[i][m][d] += (gamma_ct * O[k][pos+d]) / (double)seq_number; // dpark
           }
           /* denom. Mue/U: */
           r->mue_u_denom[i][m] += gamma_ct / (double)seq_number; // dpark
@@ -808,7 +837,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
             }
           }
           else {
-            r->u_num[i][m][0] += (gamma_ct * m_sqr(O[k][t] - state->e[m].mean.val)) / (double)seq_number; // dpark
+              r->u_num[i][m][0] += (gamma_ct * m_sqr(O[k][t] - state->e[m].mean.val)) / (double)seq_number; // dpark
           }
 
           /* sum gamma_ct * O[k][t] * O[k][t] (truncated normal density): */
@@ -825,8 +854,8 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
   if (smo->cos > 1) {
     smo->class_change->k = -1;
   }
+  printf(" one step  %f v=%d \n", smo->s[0].e[0].mean.vec[0], valid_parameter);
   
-
   if (valid_parameter) {
     /* new parameter lambda: set directly in model */
       if (sreestimate_setlambda (r, smo, obw) == -1) {
@@ -854,12 +883,13 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
    
     ghmm_cmodel_print(stdout,smo); */
 
-    
+    printf(" one step  %f \n", smo->s[0].e[0].mean.vec[0]);
     if (ghmm_cmodel_check(smo) == -1) { 
         GHMM_LOG_QUEUED(LCONVERTED); 
         GHMM_LOG(LERROR, "Model invalid!");
         goto STOP;
     }
+    printf(" one step  %f \n", smo->s[0].e[0].mean.vec[0]);
 
   }
   else {                        /* NO sequence can be build from smodel smo! */
@@ -916,13 +946,16 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
   max_iter_bw = m_min (GHMM_MAX_ITER_BW, cs->max_iter);
   eps_iter_bw = m_max (GHMM_EPS_ITER_BW, cs->eps);
 
-  /* printf("  *** ghmm_cmodel_baum_welch  %d,  %f \n",max_iter_bw,eps_iter_bw  ); */
+  printf("  *** ghmm_cmodel_baum_welch  %d,  %f \n",max_iter_bw,eps_iter_bw  );
 
   while (n <= max_iter_bw) {
-    valid = sreestimate_one_step (cs->smo, r, cs->sqd->seq_number,
-                                  cs->sqd->seq_len, cs->sqd->seq, &log_p,
-                                  cs->sqd->seq_w, cs->obw);
-    printf(" one step process done \n");
+      printf(" one step process start %d %f \n", n, cs->smo->s[0].e[0].mean.vec_num[0]);
+      printf(" one step process start %d %f \n", n, cs->smo->s[0].e[0].mean.vec[0]);
+      
+      valid = sreestimate_one_step (cs->smo, r, cs->sqd->seq_number,
+                                    cs->sqd->seq_len, cs->sqd->seq, &log_p,
+                                    cs->sqd->seq_w, cs->obw);
+      printf(" one step process end %d %f \n", n, cs->smo->s[0].e[0].mean.vec[0]);
 
     /* to follow convergence of bw: uncomment next line */
     GHMM_LOG_PRINTF(LINFO, LOC, "\tBW Iter %d\t log(p) %.4f", n, log_p);
@@ -968,7 +1001,7 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
       sreestimate_init (r, cs->smo);
       n++;
     }
-
+    printf("end while?? \n");
   }                             /* while (n <= MAX_ITER_BW) */
 
 
@@ -978,11 +1011,16 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
   /* log_p outside this function */
   *cs->logp = log_p;
 
+  printf("free?? \n");
+
+
   /* test plausibility of new parameters */
   /*  if (ghmm_cmodel_check(mo) == -1) { GHMM_LOG_QUEUED(LCONVERTED); goto STOP; } */
   sreestimate_free (&r, cs->smo->N);
+  printf("end free?? \n");
   return (0);
 STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
+  printf("sotp?? \n");
   sreestimate_free (&r, cs->smo->N);
   return (-1);
 # undef CUR_PROC

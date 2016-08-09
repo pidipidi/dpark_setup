@@ -1895,7 +1895,7 @@ class HMMFromMatricesFactory(HMMFactory):
 
                     # set up emission(s), density type is normal
                     emissions = ghmmwrapper.c_emission_array_alloc(state.M) # M emission components in this state
-
+                    
                     for em in range(state.M):
                         emission = ghmmwrapper.c_emission_array_getRef(emissions,em)
                         emission.dimension = len(B[0][0]) # dimension must be same in all states and emissions
@@ -1913,10 +1913,16 @@ class HMMFromMatricesFactory(HMMFactory):
                                                      emission.dimension, emission.variance.mat)
                         emission.det = ghmmwrapper.double_array_getitem(determinant, 0)
 
-                        vec_num = [0 for ii in xrange(len(mu)) ]
-                        mat_num = [0 for ii in xrange(len(sigma)) ]
+                        ## import numpy as np
+                        ## print np.shape(mu), np.shape(sigma)
+                        vec_num = [0. for ii in xrange(len(mu)) ]
+                        mat_num = [0. for ii in xrange(len(sigma)) ]
                         emission.mean.vec_num = ghmmwrapper.list2double_array(vec_num)
                         emission.variance.mat_num = ghmmwrapper.list2double_array(mat_num) #(dpark)
+                        determinant = ghmmwrapper.list2double_array([0.0])
+                        emission.mean.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
+                        print type(emission.mean.u_denom)
+                        
 
                     # append emissions to state
                     state.e = emissions
@@ -1943,7 +1949,7 @@ class HMMFromMatricesFactory(HMMFactory):
             state.out_states = trans[0]
             state.out_id = trans[1]
             state.out_a = trans[2]
-            state.out_a_num = trans[2] # temp (dpark)
+            state.out_a_num = ghmmwrapper.double_matrix_alloc(cmodel.cos, trans[0])  # temp (dpark)
 
             #set "in" probabilities
             trans = ghmmhelper.extract_in_cos(A,cmodel.cos, i)
@@ -4264,6 +4270,15 @@ class MultivariateGaussianMixtureHMM(GaussianEmissionHMM):
         emission.mean.vec = ghmmwrapper.list2double_array(mu)
         emission.variance.mat = ghmmwrapper.list2double_array(sigma)
 
+        # dpark for online
+        vec_num = [0. for ii in xrange(len(mu))]
+        mat_num = [0. for ii in xrange(len(sigma))]
+        emission.mean.vec_num = ghmmwrapper.list2double_array(vec_num)
+        emission.variance.mat_num = ghmmwrapper.list2double_array(mat_num)
+
+        determinant = ghmmwrapper.list2double_array([0.0])
+        emission.mean.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
+        
     def __str__(self):
         hmm = self.cmodel
         strout = ["\nHMM Overview:"]
