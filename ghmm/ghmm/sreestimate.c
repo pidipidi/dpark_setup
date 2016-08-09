@@ -335,9 +335,6 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
       /* note: denom. might be 0; never reached state? */
       a_denom_pos = 1;
 
-      printf("aaaaaaaaa %d %d\n", i, osc);
-
-
       if (r->a_denom[i][osc] <= DBL_MIN) {
                   
         a_denom_pos = 0;
@@ -367,7 +364,6 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
 
       for (j = 0; j < smo->s[i].out_states; j++) {
         j_id = smo->s[i].out_id[j];
-        printf("bbbbbbbb %d \n", j);
 
         /* TEST: denom. < numerator */
         if ((r->a_denom[i][osc] - r->a_num[i][osc][j]) < -GHMM_EPS_PREC) {
@@ -384,9 +380,7 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
             }
             else{
                 smo->s[i].out_a[osc][j]     = r->a_num[i][osc][j] * a_factor_i;
-                printf("bbbbbbbbbbbbbbbbbbbbbbbbb %f %f \n", r->a_num[i][osc][j], smo->s[i].out_a_num[osc][j]);
                 smo->s[i].out_a_num[osc][j] = r->a_num[i][osc][j];
-                printf("bbbbbbbbbbbbbbbbbbbbbbbbb22222222222222\n");
             }
         }
         else {
@@ -434,8 +428,6 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
       }
 
     }   /* osc-loop */
-
-    printf("ccccccccccccccccccccccccc\n");
 
     /* if fix, continue to next state */
     if (smo->s[i].fix){
@@ -518,7 +510,6 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, int obw)
           smo->s[i].e[m].mean.val = r->mue_num[i][m][0] / r->mue_u_denom[i][m];
         }
       }
-      printf("dddddddddddddddddddddddddd\n");
 
       /* TEST: u_denom == 0.0 ? */
       if (fabs (r->mue_u_denom[i][m]) <= DBL_MIN) {     /* < EPS_PREC ? */
@@ -683,7 +674,6 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
       smo->class_change->k = k;
     }
 
-
     /* Update alpha and beta given the model */
     if ((ghmm_cmodel_forward (smo, O[k], T[k], b, alpha, scale, &log_p_k) == -1) ||
         (ghmm_cmodel_backward (smo, O[k], T[k], b, beta, scale) == -1)) {
@@ -702,9 +692,9 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
     printf("\n\nbeta:\n");
     ighmm_cmatrix_print(stdout,beta,T_k,smo->N,"\t", ",", ";");           
     printf("\n\n");    */
-    
-    /* weighted error function */
-    *log_p += log_p_k * seq_w[k];
+        
+      /* weighted error function */
+      *log_p += log_p_k * seq_w[k];
     /* seq. is used for parameter estimation */
     valid_parameter++;
 
@@ -722,7 +712,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
       for (t = 0; t < T_k; t++) {
         pos = t * smo->dim;
         c_t = 1 / scale[t];
-
+        
         if (t > 0) {
 
           if (smo->cos == 1) {
@@ -735,7 +725,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
             }
 
             osc = smo->class_change->get_class (smo, O[k], k, t - 1);
-            /*printf("osc=%d : cos = %d, k = %d, t = %d, state=%d\n",osc,smo->cos,smo->class_change->k,t,i); */
+            /* printf("osc=%d : cos = %d, k = %d, t = %d, state=%d\n",osc,smo->cos,smo->class_change->k,t,i); */
             if (osc >= smo->cos) {
               GHMM_LOG_PRINTF(LERROR, LOC, "get_class returned index %d "
                               "but model has only %d classes!", osc, smo->cos);
@@ -836,6 +826,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
     smo->class_change->k = -1;
   }
   
+
   if (valid_parameter) {
     /* new parameter lambda: set directly in model */
       if (sreestimate_setlambda (r, smo, obw) == -1) {
@@ -918,11 +909,6 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
   };
   sreestimate_init (r, cs->smo);
 
-
-  printf("aaaaaaaaaa %f \n", r->a_num[0][0][0]);
-  printf("aaaaaaaaaaa %f \n", cs->smo->s[0].out_a_num[0][0]);
-
-
   log_p_old = -DBL_MAX;
   valid_old = cs->sqd->seq_number;
   n = 1;
@@ -933,7 +919,6 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
   /* printf("  *** ghmm_cmodel_baum_welch  %d,  %f \n",max_iter_bw,eps_iter_bw  ); */
 
   while (n <= max_iter_bw) {
-      printf("%d \n", n);
     valid = sreestimate_one_step (cs->smo, r, cs->sqd->seq_number,
                                   cs->sqd->seq_len, cs->sqd->seq, &log_p,
                                   cs->sqd->seq_w, cs->obw);

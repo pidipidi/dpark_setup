@@ -81,9 +81,7 @@ int ghmm_c_emission_alloc(ghmm_c_emission *emission, int dim)
     case binormal:
       if (dim > 2) return -1;
       ARRAY_CALLOC(emission->mean.vec, 2);
-      ARRAY_CALLOC(emission->mean.vec_num, 2);
       ARRAY_CALLOC(emission->variance.mat, 4);
-      ARRAY_CALLOC(emission->variance.mat_num, 4);
       res = 0;
       break;
     default:
@@ -753,12 +751,12 @@ void ghmm_c_emission_free (ghmm_c_emission *emission)
     return;
   if (emission->dimension > 1) {
     m_free(emission->mean.vec);
-    m_free(emission->mean.vec_num);
     m_free(emission->variance.mat);
-    m_free(emission->variance.mat_num);
     if (emission->type == multinormal) {
       m_free(emission->sigmainv);
       m_free(emission->sigmacd);
+      m_free(emission->mean.vec_num);
+      m_free(emission->variance.mat_num);
     }
   }
   return;
@@ -1998,6 +1996,8 @@ void ghmm_cmodel_set_transition (ghmm_cmodel* smo, int i, int j, int c, double p
         smo->s[i].out_a[c][out] = prob;
         /* fprintf(stderr, CUR_PROC": State %d, %d, = %f\n", i, j,
                 prob); */
+        smo->s[i].out_a_num[c][out] = 0.0;
+
         break;
       }
     }

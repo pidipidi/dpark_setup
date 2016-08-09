@@ -148,9 +148,12 @@ typedef struct ghmm_cstate {
         double getInProb(size_t index, size_t c)  { return self->in_a[c][index]; }
         double getOutProb(size_t index)           { return self->out_a[0][index]; }
         double getOutProb(size_t index, size_t c) { return self->out_a[c][index]; }
+        double getOutNum(size_t index)           { return self->out_a_num[0][index]; }
+        double getOutNum(size_t index, size_t c) { return self->out_a_num[c][index]; }
 
         void  setInProb(size_t index, size_t c, double prob) {self->in_a[c][index]  = prob; }
         void setOutProb(size_t index, size_t c, double prob) {self->out_a[c][index] = prob; }
+        void setOutNum(size_t index, size_t c, double val) {self->out_a_num[c][index] = val; }
 
         ghmm_c_emission* getEmission(size_t index) {return self->e + index; }
 

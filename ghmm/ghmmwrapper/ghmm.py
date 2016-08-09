@@ -1615,6 +1615,7 @@ class HMMFromMatricesFactory(HMMFactory):
 
     # XXX TODO: this should use the editing context
     def __call__(self, emissionDomain, distribution, A, B, pi, hmmName = None, labelDomain= None, labelList = None, densities = None):
+
         if isinstance(emissionDomain, Alphabet):
 
             if not emissionDomain == distribution.alphabet:
@@ -1912,6 +1913,11 @@ class HMMFromMatricesFactory(HMMFactory):
                                                      emission.dimension, emission.variance.mat)
                         emission.det = ghmmwrapper.double_array_getitem(determinant, 0)
 
+                        vec_num = [0 for ii in xrange(len(mu)) ]
+                        mat_num = [0 for ii in xrange(len(sigma)) ]
+                        emission.mean.vec_num = ghmmwrapper.list2double_array(vec_num)
+                        emission.variance.mat_num = ghmmwrapper.list2double_array(mat_num) #(dpark)
+
                     # append emissions to state
                     state.e = emissions
 
@@ -1937,6 +1943,7 @@ class HMMFromMatricesFactory(HMMFactory):
             state.out_states = trans[0]
             state.out_id = trans[1]
             state.out_a = trans[2]
+            state.out_a_num = trans[2] # temp (dpark)
 
             #set "in" probabilities
             trans = ghmmhelper.extract_in_cos(A,cmodel.cos, i)
@@ -2290,10 +2297,10 @@ class HMM(object):
         return logp
 
     # The functions for model training are defined in the derived classes.
-    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW):
+    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, onlineBaumWelch=-1):
         raise NotImplementedError("to be defined in derived classes")
 
-    def baumWelchSetup(self, trainingSequences, nrSteps):
+    def baumWelchSetup(self, trainingSequences, nrSteps, onlineBaumWelch=-1):
         raise NotImplementedError("to be defined in derived classes")
 
     def baumWelchStep(self, nrSteps, loglikelihoodCutoff):

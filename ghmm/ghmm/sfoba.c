@@ -214,6 +214,7 @@ int ghmm_cmodel_backward (ghmm_cmodel * smo, double *O, int T, double ***b,
   /* T is length of sequence; divide by dimension to represent the number of time points */
   T /= smo->dim;
   
+  printf("aaaaaaaaaaaaaaa \n");
   ARRAY_CALLOC (beta_tmp, smo->N);
 
   for (t = 0; t < T; t++) {
@@ -223,6 +224,7 @@ int ghmm_cmodel_backward (ghmm_cmodel * smo, double *O, int T, double ***b,
       /* printf("backward scale(%d) = %e\n", t , scale[t]); */
       goto STOP;
     }
+    printf("aaaaaaaaaaaaaaa %d\n", t);
   }
   /* initialize */
   c_t = 1 / scale[T - 1];
@@ -232,6 +234,7 @@ int ghmm_cmodel_backward (ghmm_cmodel * smo, double *O, int T, double ***b,
   }
   /* Backward Step for t = T-2, ..., 0 */
   /* beta_tmp: Vector for storage of scaled beta in one time step */
+  printf("aaaaaaaaaaaaaaa \n");
 
   if (smo->cos == 1) {
     osc = 0;
@@ -251,6 +254,7 @@ int ghmm_cmodel_backward (ghmm_cmodel * smo, double *O, int T, double ***b,
 
 
   for (t = T - 2; t >= 0; t--) {
+      printf("aaaaaaaaaaaaaaa %d\n", t);
     pos = t * smo->dim;
     if (b == NULL)
       for (i = 0; i < smo->N; i++) {
@@ -301,6 +305,8 @@ int ghmm_cmodel_backward (ghmm_cmodel * smo, double *O, int T, double ***b,
       }
     }
   }
+  printf("aaaaaaaaaaaaaaa \n");
+
   res = 0;
 STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
   m_free (beta_tmp);
