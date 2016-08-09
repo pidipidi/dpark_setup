@@ -71,7 +71,7 @@ extern "C" {
   /** max. no of iterations */
     int max_iter;
     /** flag for online baum-welch (dpark)*/
-    bool obw;
+    int obw;
   } ghmm_cmodel_baum_welch_context;
 
 

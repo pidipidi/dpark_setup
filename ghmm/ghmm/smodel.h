@@ -41,7 +41,6 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include <stdbool.h>
 
 #include "ghmm.h"
 #include "scanner.h"

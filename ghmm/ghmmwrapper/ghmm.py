@@ -3768,7 +3768,7 @@ class GaussianEmissionHMM(HMM):
         else:
             return (allPaths[0], allLogs[0])
 
-    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, onlineBaumWelch=False):
+    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, onlineBaumWelch=-1):
         """ Reestimate the model parameters given the training_sequences.
 
         Perform at most nr_steps until the improvement in likelihood
@@ -3799,7 +3799,7 @@ class GaussianEmissionHMM(HMM):
 
 
     def baumWelchSetup(self, trainingSequences, nrSteps, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW,\
-                       onlineBaumWelch=False):
+                       onlineBaumWelch=-1):
         """ Setup necessary temporary variables for Baum-Welch-reestimation.
 
         Use with baumWelchStep for more control over the training, computing
@@ -3812,7 +3812,7 @@ class GaussianEmissionHMM(HMM):
         with respect to the last iteration required to continue.
         """
         self.BWcontext = ghmmwrapper.ghmm_cmodel_baum_welch_context(
-            self.cmodel, trainingSequences.cseq)
+            self.cmodel, trainingSequences.cseq, onlineBaumWelch)
         self.BWcontext.eps = loglikelihoodCutoff
         self.BWcontext.max_iter = nrSteps
         self.BWcontext.obw = onlineBaumWelch

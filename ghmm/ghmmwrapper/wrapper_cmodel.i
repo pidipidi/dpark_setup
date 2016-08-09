@@ -40,12 +40,15 @@ typedef enum {
     union {
       double val;
       double *vec;
+      double *vec_num;   // the numerator of vec for online hmm (dpark)
+      double u_denom; // the denumerator of vec for online hmm (dpark)
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */
     union {
       double val;
       double *mat;
+      double *mat_num;   // the numerator of mat for online hmm (dpark)
     } variance;
     /** pointer to inverse of covariance matrix if multivariate normal
         else NULL */
@@ -115,6 +118,9 @@ typedef struct ghmm_cstate {
   int xPosition;
   /** y coordinate position for graph representation plotting **/
   int yPosition;
+  /** the numerator to compute transition probs from predecessor states 
+      for online baum-welch (dpark) **/
+  double **out_a_num; 
 } ghmm_cstate;
 
 %extend ghmm_cstate {
@@ -205,11 +211,11 @@ typedef struct ghmm_cmodel_class_change_context {
     /** max. no of iterations */
     int max_iter;
     /** flag for online baum-welch (dpark) */
-    bool obw;
+    int obw;
   } ghmm_cmodel_baum_welch_context;
 
 %extend ghmm_cmodel_baum_welch_context{
-    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, bool obw)
+    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, int obw)
         {
                 ghmm_cmodel_baum_welch_context *bwc = malloc(sizeof(ghmm_cmodel_baum_welch_context));
                 bwc->smo = smo;
