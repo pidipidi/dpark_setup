@@ -1895,18 +1895,17 @@ class HMMFromMatricesFactory(HMMFactory):
 
                     # set up emission(s), density type is normal
                     emissions = ghmmwrapper.c_emission_array_alloc(state.M) # M emission components in this state
-
                     
                     for em in range(state.M):
                         emission = ghmmwrapper.c_emission_array_getRef(emissions,em)                        
                         emission.dimension = len(B[0][0]) # dimension must be same in all states and emissions
-                        mu = B[i][em*2]
+                        mu    = B[i][em*2]
                         sigma = B[i][em*2+1]
-                        emission.mean.vec = ghmmwrapper.list2double_array(mu)
+                        emission.mean.vec     = ghmmwrapper.list2double_array(mu)
                         emission.variance.mat = ghmmwrapper.list2double_array(sigma)
-                        emission.sigmacd = ghmmwrapper.list2double_array(sigma) # just for allocating the space
+                        emission.sigmacd  = ghmmwrapper.list2double_array(sigma) # just for allocating the space
                         emission.sigmainv = ghmmwrapper.list2double_array(sigma) # just for allocating the space
-                        emission.fixed = 0  # fixing of emission deactivated by default
+                        emission.fixed    = 0  # fixing of emission deactivated by default
                         emission.setDensity(6)
                         # calculate inverse and determinant of covariance matrix
                         determinant = ghmmwrapper.list2double_array([0.0])
@@ -1914,32 +1913,11 @@ class HMMFromMatricesFactory(HMMFactory):
                                                      emission.dimension, emission.variance.mat)
                         emission.det = ghmmwrapper.double_array_getitem(determinant, 0)
 
-                        ## print emission.mean.vec
-                        ## print emission.mean.vec_num
-                        print ghmmwrapper.double_array2list(emission.mean.vec,emission.dimension)
-                        import sys
-                        print sys.getsizeof(emission.mean)
-                        ## emission.mean.u_denom = float(0.0)
-                        determinant = ghmmwrapper.list2double_array([0.0])
-                        emission.mean.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
-                        
-                        emission.mean.vec_num = ghmmwrapper.double_array_alloc(len(mu))
-                        for ii in xrange(len(mu)):
-                            ghmmwrapper.double_array_setitem(emission.mean.vec_num, ii, 1.0)
-
-                        print sys.getsizeof(emission.mean)
-
-                        
-                        emission.variance.mat_num = ghmmwrapper.double_array_alloc(len(sigma))
-                        for ii in xrange(len(sigma)):
-                            ghmmwrapper.double_array_setitem(emission.variance.mat_num, ii, 1.0)
-                        
-                        print ghmmwrapper.double_array2list(emission.mean.vec,emission.dimension)
-                        print ghmmwrapper.double_array2list(emission.mean.vec_num,emission.dimension)
-                        ## print ghmmwrapper.double_array2list(emission.variance.mat,emission.dimension*emission.dimension)
-                        ## print ghmmwrapper.double_array2list(emission.variance.mat_num,emission.dimension*emission.dimension)
-                        ## print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                        
+                        emission.u_denom = float(0.0)
+                        mu = [0.0 for ii in xrange(len(mu))]
+                        emission.vec_num = ghmmwrapper.list2double_array(mu)
+                        sigma = [0.0 for ii in xrange(len(sigma))]
+                        emission.mat_num = ghmmwrapper.list2double_array(sigma)
 
                     # append emissions to state
                     state.e = emissions
@@ -1966,7 +1944,7 @@ class HMMFromMatricesFactory(HMMFactory):
             state.out_states = trans[0]
             state.out_id = trans[1]
             state.out_a = trans[2]
-            state.out_a_num = ghmmwrapper.double_matrix_alloc(cmodel.cos, trans[0])  # temp (dpark)
+            state.out_a_num = ghmmwrapper.double_matrix_alloc(cmodel.cos, trans[0])  # (dpark)
 
             #set "in" probabilities
             trans = ghmmhelper.extract_in_cos(A,cmodel.cos, i)
@@ -2320,10 +2298,10 @@ class HMM(object):
         return logp
 
     # The functions for model training are defined in the derived classes.
-    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, onlineBaumWelch=-1):
+    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, learningRate=0.0):
         raise NotImplementedError("to be defined in derived classes")
 
-    def baumWelchSetup(self, trainingSequences, nrSteps, onlineBaumWelch=-1):
+    def baumWelchSetup(self, trainingSequences, nrSteps, learningRate=0.0):
         raise NotImplementedError("to be defined in derived classes")
 
     def baumWelchStep(self, nrSteps, loglikelihoodCutoff):
@@ -2611,6 +2589,14 @@ class HMM(object):
     def getStateName(self, index):
         """returns the name of the state index"""
         return self.cmodel.getStateName(index)
+
+    def getBaumWelchParams(self):
+        """ Return the params for online update """
+        return NotImplementedError
+
+    def setBaumWelchParams(self, out_a_num, vec_num, mat_num, u_denom):
+        """ Return the params for online update """
+        return NotImplementedError
 
 
 def HMMwriteList(fileName, hmmList, fileType=GHMM_FILETYPE_XML):
@@ -3798,7 +3784,7 @@ class GaussianEmissionHMM(HMM):
         else:
             return (allPaths[0], allLogs[0])
 
-    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, onlineBaumWelch=-1):
+    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, learningRate=0.0):
         """ Reestimate the model parameters given the training_sequences.
 
         Perform at most nr_steps until the improvement in likelihood
@@ -3818,7 +3804,7 @@ class GaussianEmissionHMM(HMM):
         if not self.emissionDomain.CDataType == "double":
             raise TypeError("Continuous sequence needed.")
 
-        self.baumWelchSetup(trainingSequences, nrSteps, loglikelihoodCutoff, onlineBaumWelch)
+        self.baumWelchSetup(trainingSequences, nrSteps, loglikelihoodCutoff, learningRate)
         ghmmwrapper.ghmm_cmodel_baum_welch(self.BWcontext)
         likelihood = ghmmwrapper.double_array_getitem(self.BWcontext.logp, 0)
         #(steps_made, loglikelihood_array, scale_array) = self.baumWelchStep(nrSteps,
@@ -3829,7 +3815,7 @@ class GaussianEmissionHMM(HMM):
 
 
     def baumWelchSetup(self, trainingSequences, nrSteps, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW,\
-                       onlineBaumWelch=-1):
+                       learningRate=0.0):
         """ Setup necessary temporary variables for Baum-Welch-reestimation.
 
         Use with baumWelchStep for more control over the training, computing
@@ -3838,14 +3824,14 @@ class GaussianEmissionHMM(HMM):
         @param trainingSequences can either be a SequenceSet or a Sequence
         @param nrSteps the maximal number of BW-steps
         @param loglikelihoodCutoff the least relative improvement in likelihood
-        @param onlineBaumWelch flag to enable online baum-welch algorithm
+        @param learningRate to enable online baum-welch algorithm
         with respect to the last iteration required to continue.
         """
         self.BWcontext = ghmmwrapper.ghmm_cmodel_baum_welch_context(
-            self.cmodel, trainingSequences.cseq, onlineBaumWelch)
+            self.cmodel, trainingSequences.cseq, learningRate)
         self.BWcontext.eps = loglikelihoodCutoff
         self.BWcontext.max_iter = nrSteps
-        self.BWcontext.obw = onlineBaumWelch
+        self.BWcontext.eta = learningRate
 
 
     def baumWelchStep(self, nrSteps, loglikelihoodCutoff):
@@ -3883,6 +3869,14 @@ class GaussianEmissionHMM(HMM):
                 A[i][state_index] = ghmmwrapper.double_matrix_getitem(state.out_a,0,j)
 
         return [A,B,pi]
+
+    def getBaumWelchParams(self):
+        """ Return the params for online update """
+        return NotImplementedError
+
+    def setBaumWelchParams(self, out_a_num, vec_num, mat_num, u_denom):
+        """ Return the params for online update """
+        return NotImplementedError
 
 
 # XXX - this class will taken over by ContinuousMixtureHMM
@@ -4290,11 +4284,11 @@ class MultivariateGaussianMixtureHMM(GaussianEmissionHMM):
         # dpark for online
         vec_num = [0. for ii in xrange(len(mu))]
         mat_num = [0. for ii in xrange(len(sigma))]
-        emission.mean.vec_num = ghmmwrapper.list2double_array(vec_num)
-        emission.variance.mat_num = ghmmwrapper.list2double_array(mat_num)
+        emission.vec_num = ghmmwrapper.list2double_array(vec_num)
+        emission.mat_num = ghmmwrapper.list2double_array(mat_num)
 
         determinant = ghmmwrapper.list2double_array([0.0])
-        emission.mean.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
+        emission.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
         
     def __str__(self):
         hmm = self.cmodel
@@ -4374,6 +4368,56 @@ class MultivariateGaussianMixtureHMM(GaussianEmissionHMM):
                 A[i][state_index] = ghmmwrapper.double_matrix_getitem(state.out_a,0,j)
 
         return [A,B,pi]
+
+    def getBaumWelchParams(self):
+        """ Return the params for online update """
+        out_a_num = []
+        vec_num   = []
+        mat_num   = []
+        u_denom   = []
+        
+        for i in range(self.cmodel.N):
+            out_a_num.append([0.0] * self.N)
+            vns = []
+            mns = []
+            uds = []
+            state = self.cmodel.getState(i)
+            for m in range(state.M):
+                emission = state.getEmission(m)
+                vn = ghmmwrapper.double_array2list(emission.vec_num,emission.dimension)
+                mn = ghmmwrapper.double_array2list(emission.mat_num,emission.dimension*emission.dimension)
+                ud = emission.u_denom
+
+                vns.append(vn)
+                mns.append(mn)
+                uds.append(ud)
+                
+            vec_num.append(vns)
+            mat_num.append(mns)
+            u_denom.append(uds)
+
+            for j in range(state.out_states):
+                state_index = ghmmwrapper.int_array_getitem(state.out_id, j)
+                out_a_num[i][state_index] = ghmmwrapper.double_matrix_getitem(state.out_a_num,0,j)
+
+        return [out_a_num, vec_num, mat_num, u_denom]
+    
+    def setBaumWelchParams(self, out_a_num, vec_num, mat_num, u_denom):
+        """ Return the params for online update """
+        for i in range(self.cmodel.N):
+        
+            state = self.cmodel.getState(i)
+            for m in range(state.M):
+                emission = state.getEmission(m)
+                emission.vec_num = ghmmwrapper.list2double_array(vec_num[i][m])
+                emission.mat_num = ghmmwrapper.list2double_array(mat_num[i][m])
+                emission.u_denom = u_denom[i][m]
+
+            for j in range(state.out_states):
+                state_index = ghmmwrapper.int_array_getitem(state.out_id, j)
+                ghmmwrapper.double_matrix_setitem(state.out_a_num,0,j,out_a_num[i][state_index])
+
+        return 
 
 
 def HMMDiscriminativeTraining(HMMList, SeqList, nrSteps = 50, gradient = 0):

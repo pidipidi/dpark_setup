@@ -145,8 +145,15 @@ int single_state_continuous()
 
 int main()
 {
-  /* Important! initialise rng  */
-  ghmm_rng_init();
+    ghmm_c_emission *emissions;
 
-  return single_state_continuous();
+    /* Important! initialise rng  */
+    ghmm_rng_init();
+
+    printf("aaaaaaaaaaaa\n");
+    ghmm_c_emission_alloc(emissions, 3);
+
+    return 1;
+
+        //return single_state_continuous();
 }

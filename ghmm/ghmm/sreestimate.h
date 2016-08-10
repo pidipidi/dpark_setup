@@ -70,8 +70,8 @@ extern "C" {
     double eps;
   /** max. no of iterations */
     int max_iter;
-    /** flag for online baum-welch (dpark)*/
-    int obw;
+    /** learning rate **/
+    double eta;
   } ghmm_cmodel_baum_welch_context;
 
 

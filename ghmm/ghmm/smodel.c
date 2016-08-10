@@ -68,15 +68,13 @@ int ghmm_c_emission_alloc(ghmm_c_emission *emission, int dim)
   int res = -1;
   char *e_str;
 
-  printf("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n");
-
   if (dim >= 2) {
     switch (emission->type) {
     case multinormal:
       ARRAY_CALLOC(emission->mean.vec, dim);
-      ARRAY_CALLOC(emission->mean.vec_num, dim);
+      ARRAY_CALLOC(emission->vec_num, dim);
       ARRAY_CALLOC(emission->variance.mat, dim*dim);
-      ARRAY_CALLOC(emission->variance.mat_num, dim*dim);
+      ARRAY_CALLOC(emission->mat_num, dim*dim);
       ARRAY_CALLOC(emission->sigmainv, dim*dim);
       ARRAY_CALLOC(emission->sigmacd, dim*dim);
       res = 0;
@@ -84,9 +82,9 @@ int ghmm_c_emission_alloc(ghmm_c_emission *emission, int dim)
     case binormal:
       if (dim > 2) return -1;
       ARRAY_CALLOC(emission->mean.vec, 2);
-      ARRAY_CALLOC(emission->mean.vec_num, 2);
+      ARRAY_CALLOC(emission->vec_num, 2);
       ARRAY_CALLOC(emission->variance.mat, 4);
-      ARRAY_CALLOC(emission->variance.mat_num, 4);
+      ARRAY_CALLOC(emission->mat_num, 4);
       res = 0;
       break;
     default:
@@ -761,8 +759,8 @@ void ghmm_c_emission_free (ghmm_c_emission *emission)
       m_free(emission->sigmainv);
       m_free(emission->sigmacd);
     }
-    m_free(emission->mean.vec_num);
-    m_free(emission->variance.mat_num);
+    m_free(emission->vec_num);
+    m_free(emission->mat_num);
   }
   return;
 #undef CUR_PROC
@@ -858,23 +856,23 @@ ghmm_cmodel *ghmm_cmodel_copy (const ghmm_cmodel * smo)
     /* if we have multivariate emissions, we need to copy
        the mean vector and covariance matrix too */
     if (smo->model_type & GHMM_kMultivariate){
-        sm2->s[i].e[j].mean.u_denom = smo->s[i].e[j].mean.u_denom;
+        sm2->s[i].e[j].u_denom = smo->s[i].e[j].u_denom;
         for (j=0; j < smo->s[i].M; j++) {
             dim = smo->s[i].e[j].dimension;
 
             ARRAY_CALLOC(sm2->s[i].e[j].mean.vec, dim);
-            ARRAY_CALLOC(sm2->s[i].e[j].mean.vec_num, dim);
+            ARRAY_CALLOC(sm2->s[i].e[j].vec_num, dim);
             memcpy(sm2->s[i].e[j].mean.vec, smo->s[i].e[j].mean.vec,
                    dim * sizeof(*(sm2->s[i].e[j].mean.vec)));
-            memcpy(sm2->s[i].e[j].mean.vec_num, smo->s[i].e[j].mean.vec_num,
-                   dim * sizeof(*(sm2->s[i].e[j].mean.vec_num)));
+            memcpy(sm2->s[i].e[j].vec_num, smo->s[i].e[j].vec_num,
+                   dim * sizeof(*(sm2->s[i].e[j].vec_num)));
 
             ARRAY_CALLOC(sm2->s[i].e[j].variance.mat, dim*dim);
-            ARRAY_CALLOC(sm2->s[i].e[j].variance.mat_num, dim*dim);
+            ARRAY_CALLOC(sm2->s[i].e[j].mat_num, dim*dim);
             memcpy(sm2->s[i].e[j].variance.mat, smo->s[i].e[j].variance.mat,
                    dim * sizeof(*(sm2->s[i].e[j].variance.mat)));
-            memcpy(sm2->s[i].e[j].variance.mat_num, smo->s[i].e[j].variance.mat_num,
-                   dim * sizeof(*(sm2->s[i].e[j].variance.mat_num)));
+            memcpy(sm2->s[i].e[j].mat_num, smo->s[i].e[j].mat_num,
+                   dim * sizeof(*(sm2->s[i].e[j].mat_num)));
         }
     }
 

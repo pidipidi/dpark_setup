@@ -86,17 +86,12 @@ extern "C" {
     union {
       double val;
       double *vec;
-      /* the numerator of vec for online hmm (dpark) */
-      double *vec_num;  
-      /* the denumerator of vec for online hmm (dpark) */ 
-      double u_denom; 
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */
     union {
       double val;
       double *mat;
-      double *mat_num;   // the numerator of mat for online hmm (dpark)
     } variance;
     /** pointer to inverse of covariance matrix if multivariate normal
         else NULL */
@@ -114,6 +109,12 @@ extern "C" {
     double max;
     /** if fixed != 0 the parameters of the density are fixed */
     int fixed;
+    /* the numerator of mean.vec for online hmm (dpark) */
+    double *vec_num;  
+    /* the numerator of variance.mat for online hmm (dpark) */
+    double *mat_num;   
+    /* the denumerator of mean.vec for online hmm (dpark) */ 
+    double u_denom; 
   } ghmm_c_emission;
 
 /**

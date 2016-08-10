@@ -14,26 +14,15 @@ n = 10
 X = []
 for i in xrange(n):
     x1 = np.cos(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
-    x2 = np.cos(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
+    x2 = np.sin(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
     X.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
 X = np.swapaxes(X, 0,1)
 
-if False:
-    print np.shape(X[0])
-    import matplotlib.pyplot as plt
-    
-    fig = plt.figure()
-    fig.add_subplot(211)
-    plt.plot(X[0].T)
-    fig.add_subplot(212)
-    plt.plot(X[1].T)
-    plt.show()
-    sys.exit()
 
 nEmissionDim = 2
 nState       = 20
 F = ghmm.Float()
-cov_mult = [0.3]*(nEmissionDim**2)
+cov_mult = [0.05]*(nEmissionDim**2)
 
 
 
@@ -63,17 +52,63 @@ X_train = util.convert_sequence(X) # Training input
 X_train = X_train.tolist()
 print "training data size: ", np.shape(X_train)
 
-ml.cmodel.getState(0).setOutProb(1, 0, 0.8)
-print ml.cmodel.getState(0).getOutProb(1)
-print ml.cmodel.getState(0).getOutNum(1)
-
-
-
-
-print ghmmwrapper.double_array2list(ml.cmodel.getState(0).getEmission(0).getMeanVec(), nEmissionDim)
-print "0-----------------------"
-sys.exit()
+## ml.cmodel.getState(0).setOutProb(1, 0, 0.8)
+## print ml.cmodel.getState(0).getOutProb(1)
+## print ml.cmodel.getState(0).getOutNum(1)
 
 final_seq = ghmm.SequenceSet(F, X_train)
 print 'Run Baum Welch method with (samples, length)', np.shape(X_train)
 ret = ml.baumWelch(final_seq, 10000)
+
+######################### save/load params######################################
+
+[out_a_num, vec_num, mat_num, u_denom] = ml.getBaumWelchParams()
+ml.setBaumWelchParams(out_a_num, vec_num, mat_num, u_denom)
+[out_a_num2, vec_num2, mat_num2, u_denom2] = ml.getBaumWelchParams()
+
+if np.sum(np.array(out_a_num) - np.array(out_a_num2)) + np.sum(np.array(vec_num) - np.array(vec_num2)) + np.sum(np.array(mat_num) - np.array(mat_num2)) + np.sum(np.array(u_denom) - np.array(u_denom2)) != 0.0:
+    print "get/set baumwelch param error"
+    sys.exit()
+
+
+
+######################### Adaptation ###########################################
+
+# new target traj
+X2 = []
+for i in xrange(n):
+    x1 = np.cos(t+np.pi/2.) + np.random.normal(-0.1, 0.1, np.shape(t) )
+    x2 = np.sin(t+np.pi/2.) + np.random.normal(-0.1, 0.1, np.shape(t) )
+    X2.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
+X2 = np.swapaxes(X2, 0,1)
+
+X_test = util.convert_sequence(X2) # Training input
+X_test = X_test.tolist()
+
+for i in xrange(n):
+
+    final_seq = ghmm.SequenceSet(F, X_test[i:i+1])
+    
+    ret = ml.baumWelch(final_seq, nrSteps=1, learningRate=0.25)
+
+    m = 10
+    seq_list = []
+    obs_seq = ml.sample(m, len(t), seed=3586662)
+    for j in xrange(m):
+        seq_list.append(np.array(obs_seq[j]).reshape(100,2).T)
+    seq_list = np.swapaxes(seq_list, 0, 1)
+
+    if True:
+        print np.shape(X[0])
+        import matplotlib.pyplot as plt
+
+        fig = plt.figure()
+        fig.add_subplot(211)
+        plt.plot(X[0].T, 'b-')
+        plt.plot(X2[0].T, 'g-')
+        plt.plot(seq_list[0].T, 'r-')
+        fig.add_subplot(212)
+        plt.plot(X[1].T, 'b-')
+        plt.plot(X2[1].T, 'g-')
+        plt.plot(seq_list[1].T, 'r-')
+        plt.show()

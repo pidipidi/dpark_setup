@@ -40,15 +40,12 @@ typedef enum {
     union {
       double val;
       double *vec;
-      double *vec_num;   // the numerator of vec for online hmm (dpark)
-      double u_denom; // the denumerator of vec for online hmm (dpark)
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */
     union {
       double val;
       double *mat;
-      double *mat_num;   // the numerator of mat for online hmm (dpark)
     } variance;
     /** pointer to inverse of covariance matrix if multivariate normal
         else NULL */
@@ -66,6 +63,12 @@ typedef enum {
     double max;
     /** if fixed != 0 the parameters of the density are fixed */
     int fixed;
+    /* the numerator of mean.vec for online hmm (dpark) */
+    double *vec_num;  
+    /* the numerator of variance.mat for online hmm (dpark) */
+    double *mat_num;   
+    /* the denumerator of mean.vec for online hmm (dpark) */ 
+    double u_denom; 
   };
   typedef struct ghmm_c_emission ghmm_c_emission;
 
@@ -75,7 +78,6 @@ REFERENCE_ARRAY(ghmm_c_emission, c_emission_ptr)
 %extend ghmm_c_emission {
         //int alloc(int M, int in_states, int out_states, int cos);
         //ghmm_c_emission* emission_array_alloc(size_t length) { return malloc(length*sizeof(ghmm_c_emission)); }
-
         void            setDensity(ghmm_density_t value) { self->type = value; }
         ghmm_density_t  getDensity() { return self->type; }
         double *        getMeanVec() { return self->mean.vec; }
@@ -132,7 +134,9 @@ typedef struct ghmm_cstate {
         void   setStdDev(size_t i, double value)        { self->e[i].variance.val = value; }
         void      setMin(size_t i, double value)        { self->e[i].min       = value; }
         void      setMax(size_t i, double value)        { self->e[i].max       = value; }
-        void     setUdenom(size_t i, double value)      { self->e[i].mean.u_denom  = value; }
+        void   setVecNum(size_t i, size_t c, double value)      { self->e[i].vec_num[c] = value; }
+        void   setMatNum(size_t i, size_t c, double value)      { self->e[i].mat_num[c] = value; }
+        void   setUdenom(size_t i, double value)        { self->e[i].u_denom  = value; }
 
         ghmm_density_t getDensity(size_t i) { return self->e[i].type; }
         double          getWeight(size_t i) { return self->c[i]; }
@@ -140,7 +144,9 @@ typedef struct ghmm_cstate {
         double          getStdDev(size_t i) { return self->e[i].variance.val; }
         double             setMin(size_t i) { return self->e[i].min; }
         double             setMax(size_t i) { return self->e[i].max; }
-        double            getUdenom(size_t i) { return self->e[i].mean.u_denom; }
+        double          getVecNum(size_t i, size_t c) { return self->e[i].vec_num[c]; }
+        double          getMatNum(size_t i, size_t c) { return self->e[i].mat_num[c]; }
+        double          getUdenom(size_t i) { return self->e[i].u_denom; }
 
 
         int getInState(size_t index) { return self->in_id[index]; }
@@ -215,18 +221,18 @@ typedef struct ghmm_cmodel_class_change_context {
     double eps;
     /** max. no of iterations */
     int max_iter;
-    /** flag for online baum-welch (dpark) */
-    int obw;
+    /** learning rate (dpark) **/
+    double eta;
   } ghmm_cmodel_baum_welch_context;
 
 %extend ghmm_cmodel_baum_welch_context{
-    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, int obw)
+    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, double eta)
         {
                 ghmm_cmodel_baum_welch_context *bwc = malloc(sizeof(ghmm_cmodel_baum_welch_context));
                 bwc->smo = smo;
                 bwc->sqd = sqd;
                 bwc->logp = malloc(sizeof(*bwc->logp));
-                bwc->obw  = obw;
+                bwc->eta  = eta;
                 return bwc;
         }
         ~ghmm_cmodel_baum_welch_context() {
