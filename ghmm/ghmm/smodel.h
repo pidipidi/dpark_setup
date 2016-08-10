@@ -86,8 +86,10 @@ extern "C" {
     union {
       double val;
       double *vec;
-      double *vec_num;   // the numerator of vec for online hmm (dpark)
-      double u_denom; // the denumerator of vec for online hmm (dpark)
+      /* the numerator of vec for online hmm (dpark) */
+      double *vec_num;  
+      /* the denumerator of vec for online hmm (dpark) */ 
+      double u_denom; 
     } mean;
     /** variance or pointer to a covariance matrix
         for multivariate normals */

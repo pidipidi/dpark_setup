@@ -1895,9 +1895,10 @@ class HMMFromMatricesFactory(HMMFactory):
 
                     # set up emission(s), density type is normal
                     emissions = ghmmwrapper.c_emission_array_alloc(state.M) # M emission components in this state
+
                     
                     for em in range(state.M):
-                        emission = ghmmwrapper.c_emission_array_getRef(emissions,em)
+                        emission = ghmmwrapper.c_emission_array_getRef(emissions,em)                        
                         emission.dimension = len(B[0][0]) # dimension must be same in all states and emissions
                         mu = B[i][em*2]
                         sigma = B[i][em*2+1]
@@ -1913,15 +1914,31 @@ class HMMFromMatricesFactory(HMMFactory):
                                                      emission.dimension, emission.variance.mat)
                         emission.det = ghmmwrapper.double_array_getitem(determinant, 0)
 
-                        ## import numpy as np
-                        ## print np.shape(mu), np.shape(sigma)
-                        vec_num = [0. for ii in xrange(len(mu)) ]
-                        mat_num = [0. for ii in xrange(len(sigma)) ]
-                        emission.mean.vec_num = ghmmwrapper.list2double_array(vec_num)
-                        emission.variance.mat_num = ghmmwrapper.list2double_array(mat_num) #(dpark)
+                        ## print emission.mean.vec
+                        ## print emission.mean.vec_num
+                        print ghmmwrapper.double_array2list(emission.mean.vec,emission.dimension)
+                        import sys
+                        print sys.getsizeof(emission.mean)
+                        ## emission.mean.u_denom = float(0.0)
                         determinant = ghmmwrapper.list2double_array([0.0])
                         emission.mean.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
-                        print type(emission.mean.u_denom)
+                        
+                        emission.mean.vec_num = ghmmwrapper.double_array_alloc(len(mu))
+                        for ii in xrange(len(mu)):
+                            ghmmwrapper.double_array_setitem(emission.mean.vec_num, ii, 1.0)
+
+                        print sys.getsizeof(emission.mean)
+
+                        
+                        emission.variance.mat_num = ghmmwrapper.double_array_alloc(len(sigma))
+                        for ii in xrange(len(sigma)):
+                            ghmmwrapper.double_array_setitem(emission.variance.mat_num, ii, 1.0)
+                        
+                        print ghmmwrapper.double_array2list(emission.mean.vec,emission.dimension)
+                        print ghmmwrapper.double_array2list(emission.mean.vec_num,emission.dimension)
+                        ## print ghmmwrapper.double_array2list(emission.variance.mat,emission.dimension*emission.dimension)
+                        ## print ghmmwrapper.double_array2list(emission.variance.mat_num,emission.dimension*emission.dimension)
+                        ## print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                         
 
                     # append emissions to state

@@ -1,6 +1,7 @@
 import numpy as np
 import sys, os
 import ghmm
+import ghmmwrapper
 
 sys.path.insert(0, os.path.expanduser('~')+'/catkin_ws/src/hrl-assistive/hrl_anomaly_detection/src/hrl_anomaly_detection/hmm')
 import learning_util as util
@@ -62,9 +63,16 @@ X_train = util.convert_sequence(X) # Training input
 X_train = X_train.tolist()
 print "training data size: ", np.shape(X_train)
 
-## ml.cmodel.getState(0).setUdenom(0, 0.8)
-print ml.cmodel.getState(0).getEmission(0).getMeanVec()
+ml.cmodel.getState(0).setOutProb(1, 0, 0.8)
+print ml.cmodel.getState(0).getOutProb(1)
+print ml.cmodel.getState(0).getOutNum(1)
+
+
+
+
+print ghmmwrapper.double_array2list(ml.cmodel.getState(0).getEmission(0).getMeanVec(), nEmissionDim)
 print "0-----------------------"
+sys.exit()
 
 final_seq = ghmm.SequenceSet(F, X_train)
 print 'Run Baum Welch method with (samples, length)', np.shape(X_train)

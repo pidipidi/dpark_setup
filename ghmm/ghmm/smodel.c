@@ -67,6 +67,9 @@ int ghmm_c_emission_alloc(ghmm_c_emission *emission, int dim)
 # define CUR_PROC "ghmm_c_emission_alloc"
   int res = -1;
   char *e_str;
+
+  printf("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n");
+
   if (dim >= 2) {
     switch (emission->type) {
     case multinormal:
