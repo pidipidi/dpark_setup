@@ -202,6 +202,7 @@ alias bp='ssh administrator@10.68.0.103'
 
 # location
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
+alias i='cd /home/dpark/hrl_file_server/dpark_data/anomaly/ICRA2017'
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
@@ -229,3 +230,6 @@ alias bap='ssh -X administrator@143.215.225.192'
 
 #alias hark='node ~/hark/hark-designer/app.js'
 alias hk='cd ~/hark/hark-designer/userdata/networks'
+
+#git
+alias gg='git commit -a -m "test param update" && git push'

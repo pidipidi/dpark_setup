@@ -69,6 +69,8 @@ typedef enum {
     double *mat_num;   
     /* the denumerator of mean.vec for online hmm (dpark) */ 
     double u_denom; 
+    /* diagonal co-variance matrix flag (dpark) */
+    int diag_cov;
   };
   typedef struct ghmm_c_emission ghmm_c_emission;
 
@@ -137,6 +139,7 @@ typedef struct ghmm_cstate {
         void   setVecNum(size_t i, size_t c, double value)      { self->e[i].vec_num[c] = value; }
         void   setMatNum(size_t i, size_t c, double value)      { self->e[i].mat_num[c] = value; }
         void   setUdenom(size_t i, double value)        { self->e[i].u_denom  = value; }
+        void   setDiagCov(size_t i, double value)        { self->e[i].diag_cov = value; }
 
         ghmm_density_t getDensity(size_t i) { return self->e[i].type; }
         double          getWeight(size_t i) { return self->c[i]; }
@@ -147,6 +150,7 @@ typedef struct ghmm_cstate {
         double          getVecNum(size_t i, size_t c) { return self->e[i].vec_num[c]; }
         double          getMatNum(size_t i, size_t c) { return self->e[i].mat_num[c]; }
         double          getUdenom(size_t i) { return self->e[i].u_denom; }
+        double          getDiagCov(size_t i) { return self->e[i].diag_cov; }
 
 
         int getInState(size_t index) { return self->in_id[index]; }

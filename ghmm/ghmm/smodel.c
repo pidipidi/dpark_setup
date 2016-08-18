@@ -153,6 +153,7 @@ ghmm_cmodel * ghmm_cmodel_calloc(int N, int modeltype, int dim) {
   mo->M = 0;
   mo->model_type = modeltype;
   mo->dim = dim;
+
   ARRAY_CALLOC(mo->s, N);
   return mo;
 STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
@@ -859,6 +860,7 @@ ghmm_cmodel *ghmm_cmodel_copy (const ghmm_cmodel * smo)
         sm2->s[i].e[j].u_denom = smo->s[i].e[j].u_denom;
         for (j=0; j < smo->s[i].M; j++) {
             dim = smo->s[i].e[j].dimension;
+            sm2->s[i].e[j].diag_cov = smo->s[i].e[j].diag_cov; // dpark
 
             ARRAY_CALLOC(sm2->s[i].e[j].mean.vec, dim);
             ARRAY_CALLOC(sm2->s[i].e[j].vec_num, dim);
@@ -887,6 +889,7 @@ ghmm_cmodel *ghmm_cmodel_copy (const ghmm_cmodel * smo)
   sm2->M = smo->M;
   sm2->prior = smo->prior;
   sm2->dim = smo->dim;
+
   return (sm2);
 STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
   ghmm_cmodel_free (&sm2);

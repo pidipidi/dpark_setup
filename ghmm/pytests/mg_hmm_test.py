@@ -23,12 +23,12 @@ nEmissionDim = 2
 nState       = 20
 F = ghmm.Float()
 cov_mult = [0.05]*(nEmissionDim**2)
-
+cov_type = 'diag'
 
 
 # Transition probability matrix (Initial transition probability, TODO?)
 A = util.init_trans_mat(nState).tolist()
-mus, cov = util.vectors_to_mean_cov(X, nState, nEmissionDim, cov_type='full')
+mus, cov = util.vectors_to_mean_cov(X, nState, nEmissionDim, cov_type=cov_type)
 
 # cov: state x dim x dim
 for i in xrange(nEmissionDim):
@@ -55,6 +55,7 @@ print "training data size: ", np.shape(X_train)
 ## ml.cmodel.getState(0).setOutProb(1, 0, 0.8)
 ## print ml.cmodel.getState(0).getOutProb(1)
 ## print ml.cmodel.getState(0).getOutNum(1)
+if cov_type=='diag': ml.setDiagonalCovariance(0)
 
 final_seq = ghmm.SequenceSet(F, X_train)
 print 'Run Baum Welch method with (samples, length)', np.shape(X_train)
@@ -85,11 +86,14 @@ X2 = np.swapaxes(X2, 0,1)
 X_test = util.convert_sequence(X2) # Training input
 X_test = X_test.tolist()
 
-for i in xrange(n):
 
-    final_seq = ghmm.SequenceSet(F, X_test[i:i+1])
-    
-    ret = ml.baumWelch(final_seq, nrSteps=1, learningRate=0.25)
+
+
+
+for i in xrange(-1, n):
+    if i >= 0:
+        final_seq = ghmm.SequenceSet(F, X_test[i:i+1])    
+        ret = ml.baumWelch(final_seq, nrSteps=8, learningRate=0.1)
 
     m = 10
     seq_list = []

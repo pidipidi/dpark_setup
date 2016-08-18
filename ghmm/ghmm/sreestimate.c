@@ -827,10 +827,15 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
           if (smo->model_type & GHMM_kMultivariate) {
             for (di = 0; di < state->e[m].dimension; di++) {
               for (dj = 0; dj < state->e[m].dimension; dj++ ) {
-                r->u_num[i][m][di*state->e[m].dimension+dj] +=
-                    (gamma_ct
-                     * (O[k][pos+di] - state->e[m].mean.vec[di])
-                     * (O[k][pos+dj] - state->e[m].mean.vec[dj])) / (double)seq_number; // dpark
+                  if (state->e[m].diag_cov>0 & di != dj){
+                      r->u_num[i][m][di*state->e[m].dimension+dj] = 0.0;
+                  }
+                  else{
+                      r->u_num[i][m][di*state->e[m].dimension+dj] +=
+                          (gamma_ct
+                           * (O[k][pos+di] - state->e[m].mean.vec[di])
+                           * (O[k][pos+dj] - state->e[m].mean.vec[dj])) / (double)seq_number; // dpark
+                  }
               }
             }
           }

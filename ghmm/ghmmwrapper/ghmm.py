@@ -1787,6 +1787,7 @@ class HMMFromMatricesFactory(HMMFactory):
                         emission.variance.val = sigma
                         emission.fixed = 0  # fixing of emission deactivated by default
                         emission.setDensity(0)
+                        emission.diag_cov = 0
 
                     # append emissions to state
                     state.e = emissions
@@ -1825,6 +1826,7 @@ class HMMFromMatricesFactory(HMMFactory):
                         emission = ghmmwrapper.c_emission_array_getRef(emissions, j)
                         emission.type = densities[i][j]
                         emission.dimension = 1
+                        emission.diag_cov = 0
                         if (emission.type == ghmmwrapper.normal
                             or emission.type == ghmmwrapper.normal_approx):
                             emission.mean.val = parameters[1]
@@ -1918,6 +1920,7 @@ class HMMFromMatricesFactory(HMMFactory):
                         emission.vec_num = ghmmwrapper.list2double_array(mu)
                         sigma = [0.0 for ii in xrange(len(sigma))]
                         emission.mat_num = ghmmwrapper.list2double_array(sigma)
+                        emission.diag_cov = 0
 
                     # append emissions to state
                     state.e = emissions
@@ -2595,6 +2598,10 @@ class HMM(object):
         return NotImplementedError
 
     def setBaumWelchParams(self, out_a_num, vec_num, mat_num, u_denom):
+        """ Return the params for online update """
+        return NotImplementedError
+
+    def setDiagonalCovariance(self, val):
         """ Return the params for online update """
         return NotImplementedError
 
@@ -3878,6 +3885,11 @@ class GaussianEmissionHMM(HMM):
         """ Return the params for online update """
         return NotImplementedError
 
+    def setDiagonalCovariance(self, val):
+        """ Return the params for online update """
+        return NotImplementedError
+    
+
 
 # XXX - this class will taken over by ContinuousMixtureHMM
 class GaussianMixtureHMM(GaussianEmissionHMM):
@@ -4288,7 +4300,8 @@ class MultivariateGaussianMixtureHMM(GaussianEmissionHMM):
         emission.mat_num = ghmmwrapper.list2double_array(mat_num)
 
         determinant = ghmmwrapper.list2double_array([0.0])
-        emission.u_denom = ghmmwrapper.double_array_getitem(determinant, 0)
+        emission.u_denom  = ghmmwrapper.double_array_getitem(determinant, 0)
+        emission.diag_cov = 0
         
     def __str__(self):
         hmm = self.cmodel
@@ -4417,6 +4430,17 @@ class MultivariateGaussianMixtureHMM(GaussianEmissionHMM):
                 state_index = ghmmwrapper.int_array_getitem(state.out_id, j)
                 ghmmwrapper.double_matrix_setitem(state.out_a_num,0,j,out_a_num[i][state_index])
 
+        return 
+
+    def setDiagonalCovariance(self, val):
+        """ Set the params for covariance matrix """
+        for i in range(self.cmodel.N):
+        
+            state = self.cmodel.getState(i)
+            for m in range(state.M):
+                emission = state.getEmission(m)
+                emission.diag_cov = val
+        
         return 
 
 

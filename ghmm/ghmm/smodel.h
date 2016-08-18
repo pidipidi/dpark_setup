@@ -115,6 +115,8 @@ extern "C" {
     double *mat_num;   
     /* the denumerator of mean.vec for online hmm (dpark) */ 
     double u_denom; 
+    /* diagonal co-variance matrix flag (dpark) */
+    int diag_cov;
   } ghmm_c_emission;
 
 /**
