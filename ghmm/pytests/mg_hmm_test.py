@@ -13,8 +13,12 @@ n = 10
 
 X = []
 for i in xrange(n):
-    x1 = np.cos(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
-    x2 = np.sin(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
+    if i<1:
+        x1 = np.cos(t) + np.random.normal(-0.3, 0.3, np.shape(t) )
+        x2 = np.sin(t) + np.random.normal(-0.3, 0.3, np.shape(t) )
+    else:
+        x1 = np.cos(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
+        x2 = np.sin(t) + np.random.normal(-0.2, 0.2, np.shape(t) )        
     X.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
 X = np.swapaxes(X, 0,1)
 
@@ -74,12 +78,11 @@ if np.sum(np.array(out_a_num) - np.array(out_a_num2)) + np.sum(np.array(vec_num)
 
 
 ######################### Adaptation ###########################################
-
 # new target traj
 X2 = []
 for i in xrange(n):
-    x1 = np.cos(t+np.pi/2.) + np.random.normal(-0.1, 0.1, np.shape(t) )
-    x2 = np.sin(t+np.pi/2.) + np.random.normal(-0.1, 0.1, np.shape(t) )
+    x1 = np.cos(t+np.pi/2.) + np.random.normal(-0.2, 0.2, np.shape(t) )
+    x2 = np.sin(t+np.pi/2.) + np.random.normal(-0.2, 0.2, np.shape(t) )
     X2.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
 X2 = np.swapaxes(X2, 0,1)
 
@@ -87,13 +90,11 @@ X_test = util.convert_sequence(X2) # Training input
 X_test = X_test.tolist()
 
 
-
-
-
 for i in xrange(-1, n):
     if i >= 0:
         final_seq = ghmm.SequenceSet(F, X_test[i:i+1])    
-        ret = ml.baumWelch(final_seq, nrSteps=8, learningRate=0.1)
+        ret = ml.baumWelch(final_seq, nrSteps=1, learningRate=0.1)
+        print "Ret: ", ret
 
     m = 10
     seq_list = []
