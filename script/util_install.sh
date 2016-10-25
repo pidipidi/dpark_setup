@@ -14,3 +14,9 @@ git config --global user.name "pidipidi"
 # vpn
 cd /etc/
 sudo chmod +rx vpnc 
+
+#pdf
+sudo apt-get install zenity ghostscript
+cd ~/.gnome2/nautilus-scripts/
+wget https://launchpad.net/compress-pdf/1.x/1.4/+download/Compress-PDF-1.4.tar.gz
+tar zvxf Compress-PDF-1.4.tar.gz

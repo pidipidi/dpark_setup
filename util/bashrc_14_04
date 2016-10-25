@@ -203,6 +203,7 @@ alias bp='ssh administrator@10.68.0.103'
 # location
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
 alias i='cd /home/dpark/hrl_file_server/dpark_data/anomaly/ICRA2017'
+alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/AURO2016'
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
