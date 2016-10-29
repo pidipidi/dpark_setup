@@ -225,18 +225,21 @@ typedef struct ghmm_cmodel_class_change_context {
     double eps;
     /** max. no of iterations */
     int max_iter;
-    /** learning rate (dpark) **/
+    /** learning rate (dpark) */
     double eta;
+  /** flag to fix the update of transition matrix (dpark) */
+    int fixed_trans;
   } ghmm_cmodel_baum_welch_context;
 
 %extend ghmm_cmodel_baum_welch_context{
-    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, double eta)
+    ghmm_cmodel_baum_welch_context(ghmm_cmodel *smo, ghmm_cseq *sqd, double eta, int fixed_trans)
         {
                 ghmm_cmodel_baum_welch_context *bwc = malloc(sizeof(ghmm_cmodel_baum_welch_context));
                 bwc->smo = smo;
                 bwc->sqd = sqd;
                 bwc->logp = malloc(sizeof(*bwc->logp));
                 bwc->eta  = eta;
+                bwc->fixed_trans = fixed_trans;
                 return bwc;
         }
         ~ghmm_cmodel_baum_welch_context() {

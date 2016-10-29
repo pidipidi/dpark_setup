@@ -89,10 +89,10 @@ static int sreestimate_precompute_b (ghmm_cmodel * smo, double *O, int T,
                                      double ***b);
 static int sreestimate_free_matvec (double **alpha, double **beta,
                                     double *scale, double ***b, int T, int N);
-static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, double eta);
+static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, double eta, int fixed_trans);
 static int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r,
                                  int seq_number, int *T, double **O,
-                                 double *log_p, double *seq_w, double eta);
+                                 double *log_p, double *seq_w, double eta, int fixed_trans);
 /*----------------------------------------------------------------------------*/
 /* various allocations */
 static local_store_t *sreestimate_alloc (const ghmm_cmodel * smo)
@@ -312,7 +312,7 @@ static int sreestimate_precompute_b (ghmm_cmodel * smo, double *O, int T,
 
 
 /*----------------------------------------------------------------------------*/
-static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, double eta)
+static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, double eta, int fixed_trans)
 {
 # define CUR_PROC "sreestimate_setlambda"
   int res = -1;
@@ -336,6 +336,8 @@ static int sreestimate_setlambda (local_store_t * r, ghmm_cmodel * smo, double e
     
     /* A */
     for (osc = 0; osc < smo->cos; osc++) {
+      if (fixed_trans) break;
+
       /* note: denom. might be 0; never reached state? */
       a_denom_pos = 1;
 
@@ -654,7 +656,7 @@ STOP:     /* Label STOP from ARRAY_[CM]ALLOC */
 /*----------------------------------------------------------------------------*/
 int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
                           int *T, double **O, double *log_p, double *seq_w, 
-                          double eta)
+                          double eta, int fixed_trans)
 {
 # define CUR_PROC "sreestimate_one_step"
   int res = -1;
@@ -861,7 +863,7 @@ int sreestimate_one_step (ghmm_cmodel * smo, local_store_t * r, int seq_number,
   
   if (valid_parameter) {
     /* new parameter lambda: set directly in model */
-      if (sreestimate_setlambda (r, smo, eta) == -1) {
+      if (sreestimate_setlambda (r, smo, eta, fixed_trans) == -1) {
       GHMM_LOG_QUEUED(LCONVERTED);
       return (-1);
     }
@@ -956,7 +958,7 @@ int ghmm_cmodel_baum_welch (ghmm_cmodel_baum_welch_context * cs)
 
       valid = sreestimate_one_step (cs->smo, r, cs->sqd->seq_number,
                                     cs->sqd->seq_len, cs->sqd->seq, &log_p,
-                                    cs->sqd->seq_w, cs->eta);
+                                    cs->sqd->seq_w, cs->eta, cs->fixed_trans);
 
     /* to follow convergence of bw: uncomment next line */
     GHMM_LOG_PRINTF(LINFO, LOC, "\tBW Iter %d\t log(p) %.4f", n, log_p);

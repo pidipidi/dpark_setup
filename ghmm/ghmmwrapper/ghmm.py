@@ -3791,7 +3791,7 @@ class GaussianEmissionHMM(HMM):
         else:
             return (allPaths[0], allLogs[0])
 
-    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, learningRate=0.0):
+    def baumWelch(self, trainingSequences, nrSteps=ghmmwrapper.MAX_ITER_BW, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW, learningRate=0.0, fixedTrans=0):
         """ Reestimate the model parameters given the training_sequences.
 
         Perform at most nr_steps until the improvement in likelihood
@@ -3800,6 +3800,7 @@ class GaussianEmissionHMM(HMM):
         @param trainingSequences can either be a SequenceSet or a Sequence
         @param nrSteps the maximal number of BW-steps
         @param loglikelihoodCutoff the least relative improvement in likelihood
+        @param fixedTrans to disable updating transition probabilities
         with respect to the last iteration required to continue.
 
         Result: Final loglikelihood
@@ -3811,7 +3812,7 @@ class GaussianEmissionHMM(HMM):
         if not self.emissionDomain.CDataType == "double":
             raise TypeError("Continuous sequence needed.")
 
-        self.baumWelchSetup(trainingSequences, nrSteps, loglikelihoodCutoff, learningRate)
+        self.baumWelchSetup(trainingSequences, nrSteps, loglikelihoodCutoff, learningRate, fixedTrans)
         ghmmwrapper.ghmm_cmodel_baum_welch(self.BWcontext)
         likelihood = ghmmwrapper.double_array_getitem(self.BWcontext.logp, 0)
         #(steps_made, loglikelihood_array, scale_array) = self.baumWelchStep(nrSteps,
@@ -3822,7 +3823,7 @@ class GaussianEmissionHMM(HMM):
 
 
     def baumWelchSetup(self, trainingSequences, nrSteps, loglikelihoodCutoff=ghmmwrapper.EPS_ITER_BW,\
-                       learningRate=0.0):
+                       learningRate=0.0, fixedTrans=0):
         """ Setup necessary temporary variables for Baum-Welch-reestimation.
 
         Use with baumWelchStep for more control over the training, computing
@@ -3832,13 +3833,15 @@ class GaussianEmissionHMM(HMM):
         @param nrSteps the maximal number of BW-steps
         @param loglikelihoodCutoff the least relative improvement in likelihood
         @param learningRate to enable online baum-welch algorithm
+        @param fixedTrans to disable updating transition probabilities
         with respect to the last iteration required to continue.
         """
         self.BWcontext = ghmmwrapper.ghmm_cmodel_baum_welch_context(
-            self.cmodel, trainingSequences.cseq, learningRate)
+            self.cmodel, trainingSequences.cseq, learningRate, fixedTrans)
         self.BWcontext.eps = loglikelihoodCutoff
         self.BWcontext.max_iter = nrSteps
         self.BWcontext.eta = learningRate
+        self.BWcontext.fixed_trans = fixedTrans
 
 
     def baumWelchStep(self, nrSteps, loglikelihoodCutoff):

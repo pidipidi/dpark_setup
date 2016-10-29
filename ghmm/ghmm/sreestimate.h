@@ -70,8 +70,10 @@ extern "C" {
     double eps;
   /** max. no of iterations */
     int max_iter;
-    /** learning rate **/
+    /** learning rate (dpark) **/
     double eta;
+  /** flag to fix the update of transition matrix (dpark) */
+    int fixed_trans;
   } ghmm_cmodel_baum_welch_context;
 
 
