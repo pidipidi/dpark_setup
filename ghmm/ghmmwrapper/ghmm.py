@@ -2367,8 +2367,8 @@ class HMM(object):
         cbeta = ghmmwrapper.double_matrix_alloc(t, self.N)
 
         error = self.cmodel.backward(seq,t,cbeta,cscale)
-        if error == -1:
-            log.error( "backward finished with -1: EmissionSequence cannot be build.")
+        ## if error == -1:
+        ##     log.error( "backward finished with -1: EmissionSequence cannot be build.")
 
         pybeta = ghmmhelper.double_matrix2list(cbeta,t,self.N)
 
