@@ -2810,8 +2810,8 @@ class DiscreteEmissionHMM(HMM):
         #print cbeta[0]
 
         error, logp = self.cmodel.backward_termination(seq, t, cbeta[0], cscale)
-        if error == -1:
-            log.error("backward finished with -1: EmissionSequence cannot be build.")
+        ## if error == -1:
+        ##     log.error("backward finished with -1: EmissionSequence cannot be build.")
 
         # deallocation
         ghmmwrapper.free(cscale)
@@ -3422,8 +3422,8 @@ class StateLabelHMM(DiscreteEmissionHMM):
         cbeta = ghmmwrapper.double_matrix_alloc(t, self.cmodel.N)
 
         error,logp = self.cmodel.label_backward(seq, label, t, cbeta, cscale)
-        if error == -1:
-            log.error( "backward finished with -1: EmissionSequence cannot be build.")
+        ## if error == -1:
+        ##     log.error( "backward finished with -1: EmissionSequence cannot be build.")
 
         pybeta = ghmmhelper.double_matrix2list(cbeta,t,self.cmodel.N)
 
@@ -3679,8 +3679,8 @@ class GaussianEmissionHMM(HMM):
         cbeta = ghmmwrapper.double_matrix_alloc(t, self.cmodel.N)
 
         error = self.cmodel.backward(seq,t,None,cbeta,cscale)
-        if error == -1:
-            log.error( "backward finished with -1: EmissionSequence cannot be build.")
+        ## if error == -1:
+        ##     log.error( "backward finished with -1: EmissionSequence cannot be build.")
 
 
         pybeta = ghmmhelper.double_matrix2list(cbeta,t,self.cmodel.N)
