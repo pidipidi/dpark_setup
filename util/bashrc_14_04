@@ -133,6 +133,9 @@ source ~/git-completion.bash
 export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\%s)")\[\e[0m\]>' 
 export GIT_SSL_NO_VERIFY=1
 
+# Matlab
+#export MATLAB_ROOT=/usr/local/MATLAB/R2016b
+
 # Custom 
 export ROBOT=sim
 #export DISPLAY=:0.0
@@ -207,7 +210,7 @@ alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/AURO2016'
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
-alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection'
+alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection/isolator'
 alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
 
 # mount
@@ -234,3 +237,5 @@ alias hk='cd ~/hark/hark-designer/userdata/networks'
 
 #git
 alias gg='git commit -a -m "test param update" && git push'
+# added by Anaconda2 4.2.0 installer
+#export PATH="/home/dpark/util/anaconda2/bin:$PATH"
