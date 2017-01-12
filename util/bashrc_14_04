@@ -168,7 +168,7 @@ if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
    export TORCH_DIR=$HOME/git/torch
 elif [ "$USER" = ubuntu ]; then
    export PATH=/usr/local/cuda-8.0/bin:$PATH
-   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
    #. /home/ubuntu/git/torch/install/bin/torch-activate
 fi
 
