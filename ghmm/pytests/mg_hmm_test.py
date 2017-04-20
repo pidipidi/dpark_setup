@@ -7,27 +7,54 @@ sys.path.insert(0, os.path.expanduser('~')+'/catkin_ws/src/hrl-assistive/hrl_ano
 import learning_util as util
 
 
+def f1(t, rnd_mag=0.3):
+
+    x1 = np.cos(t)
+    x2 = np.sin(t)
+
+    ts = [0]*10
+    te = [t[-1]]*30
+    x1 = np.hstack([np.cos(ts), x1, np.cos(te)])
+    x2 = np.hstack([np.sin(ts), x2, np.sin(te)])
+
+    x1 += np.random.normal(0,rnd_mag,np.shape(x1))
+    x2 += np.random.normal(0,rnd_mag,np.shape(x2))
+
+    return x1, x2
+
+def f2(t, rnd_mag=0.3):
+
+    x1 = np.cos(t)
+    x2 = np.sin(t)
+
+    ts = [0]*30
+    te = [t[-1]]*10
+    x1 = np.hstack([np.cos(ts), x1, np.cos(te)])
+    x2 = np.hstack([np.sin(ts), x2, np.sin(te)])
+
+    x1 += np.random.normal(0,rnd_mag,np.shape(x1))
+    x2 += np.random.normal(0,rnd_mag,np.shape(x2))
+
+    return x1, x2
+
+#------------------------------------------------------------------------------
+
+
 
 t = np.linspace(0.0, np.pi*2.0, 100)
-n = 10 
+n = 20 
 
 X = []
 for i in xrange(n):
-    if i<1:
-        x1 = np.cos(t) + np.random.normal(-0.3, 0.3, np.shape(t) )
-        x2 = np.sin(t) + np.random.normal(-0.3, 0.3, np.shape(t) )
-    else:
-        x1 = np.cos(t) + np.random.normal(-0.2, 0.2, np.shape(t) )
-        x2 = np.sin(t) + np.random.normal(-0.2, 0.2, np.shape(t) )        
-    X.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
+    x1,x2 = f1(t, rnd_mag=0.1)
+    X.append( np.vstack([ x1.reshape(1,len(x1)), x2.reshape(1,len(x2)) ]) )
 X = np.swapaxes(X, 0,1)
-
 
 nEmissionDim = 2
 nState       = 20
 F = ghmm.Float()
 cov_mult = [0.05]*(nEmissionDim**2)
-cov_type = 'diag'
+cov_type = 'full' #'diag'
 
 
 # Transition probability matrix (Initial transition probability, TODO?)
@@ -75,40 +102,47 @@ if np.sum(np.array(out_a_num) - np.array(out_a_num2)) + np.sum(np.array(vec_num)
     print "get/set baumwelch param error"
     sys.exit()
 
-
+[A, B, pi] = ml.asMatrices()
+org_mu_list = []
+for j in xrange(nState):
+    org_mu_list.append( B[j][0] )
+org_mu_list = np.array(org_mu_list)
 
 ######################### Adaptation ###########################################
 # new target traj
 X2 = []
+n  = 5
 for i in xrange(n):
-    x1 = np.cos(t+np.pi/2.) + np.random.normal(-0.2, 0.2, np.shape(t) )
-    x2 = np.sin(t+np.pi/2.) + np.random.normal(-0.2, 0.2, np.shape(t) )
-    X2.append( np.vstack([ x1.reshape(1,len(t)), x2.reshape(1,len(t)) ]) )
+    x1,x2 = f2(t, rnd_mag=0.1)
+    X2.append( np.vstack([ x1.reshape(1,len(x1)), x2.reshape(1,len(x2)) ]) )
 X2 = np.swapaxes(X2, 0,1)
 
 X_test = util.convert_sequence(X2) # Training input
 X_test = X_test.tolist()
 
 
-for i in xrange(-1, n):
+import matplotlib.pyplot as plt
+mu_list = [[] for i in xrange(nEmissionDim)]
+for i in xrange(-1, 20):
     if i >= 0:
-        final_seq = ghmm.SequenceSet(F, X_test[i:i+1])    
-        ret = ml.baumWelch(final_seq, nrSteps=1, learningRate=0.1)
+        final_seq = ghmm.SequenceSet(F, X_test)    
+        #final_seq = ghmm.SequenceSet(F, X_test[i:i+1])    
+        ret = ml.baumWelch(final_seq, nrSteps=40, learningRate=0.4)
         print "Ret: ", ret
 
     m = 10
     seq_list = []
-    obs_seq = ml.sample(m, len(t), seed=3586662)
+    obs_seq = ml.sample(m, len(x1), seed=3586662)    
     for j in xrange(m):
-        seq_list.append(np.array(obs_seq[j]).reshape(100,2).T)
+        seq_list.append(np.array(obs_seq[j]).reshape(len(x1),2).T)
     seq_list = np.swapaxes(seq_list, 0, 1)
 
     if True:
-        print np.shape(X[0])
         import matplotlib.pyplot as plt
 
         fig = plt.figure()
-        fig.add_subplot(211)
+        
+        fig.add_subplot(211)        
         plt.plot(X[0].T, 'b-')
         plt.plot(X2[0].T, 'g-')
         plt.plot(seq_list[0].T, 'r-')
@@ -116,4 +150,10 @@ for i in xrange(-1, n):
         plt.plot(X[1].T, 'b-')
         plt.plot(X2[1].T, 'g-')
         plt.plot(seq_list[1].T, 'r-')
+
+        plt.xlabel('Time')
+        plt.xlabel('Observation')        
+        
         plt.show()
+
+
