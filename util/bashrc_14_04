@@ -144,6 +144,7 @@ if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
    export ROS_MASTER_URI=http://c1:11311
 else
    export ROS_MASTER_URI=http://localhost:11311
+   #export ROS_MASTER_URI=http://143.215.225.192:11311
 fi
 
 # added by the HRL lab install script
@@ -211,7 +212,7 @@ alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/AURO2016'
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
-alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection/adaptation'
+alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection/vae'
 alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
 alias ee='roscd hrl_execution_monitor/src/hrl_execution_monitor'
 
