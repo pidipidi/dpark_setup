@@ -24,3 +24,5 @@ hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u
 
 shelltitle "$ |bash"
 
+
+defflow off

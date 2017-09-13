@@ -208,7 +208,7 @@ alias bp='ssh administrator@10.68.0.103'
 # location
 alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
 alias i='cd /home/dpark/hrl_file_server/dpark_data/anomaly/ICRA2017'
-alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/AURO2016'
+alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/ICRA2018'
 alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
 alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
 alias qq='roscd hrl_traversability_planner'
@@ -220,6 +220,8 @@ alias ee='roscd hrl_execution_monitor/src/hrl_execution_monitor'
 #alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
 alias hrl_mount='sudo mount -t cifs //ad.gatech.edu/bme/labs/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,noperm,sec=ntlm' 
 alias hrl_umount='sudo umount hrl_file_server -l'
+alias irb_mount='sudo mount -t cifs //ad.gatech.edu/bme/labs/ckemp-IRB ~/IRB_fileshare -o username=dpark8,uid=$UID'
+alias irb_umount='sudo umount IRB_fileshare -l'
 
 # vpn
 alias vpn='sudo vpnc /etc/vpnc/gatech.conf'
