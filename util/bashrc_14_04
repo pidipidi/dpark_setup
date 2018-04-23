@@ -114,69 +114,28 @@ if ! shopt -oq posix; then
 fi
 
 ## for Robot
-if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
-   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
-fi
-if [ "$HOSTNAME" = pr2c2 ] ; then
-   source /home/dpark/git/dpark_setup/util/bashrc.pr2.sh
-   export ROS_MASTER_URI=http://10.68.0.1:11311
-fi
+
 
 
 ## Run Setup Scripts --------------------------------------------
 # ROS
 source /opt/ros/indigo/setup.bash
-source ~/catkin_ws/devel_isolated/setup.bash
+#source ~/catkin_ws/devel_isolated/setup.bash
 
 # git 
 source ~/git-completion.bash 
 export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\%s)")\[\e[0m\]>' 
 export GIT_SSL_NO_VERIFY=1
 
-# Matlab
-#export MATLAB_ROOT=/usr/local/MATLAB/R2016b
-
 # Custom 
 export ROBOT=sim
 #export DISPLAY=:0.0
-#export ROS_HOSTNAME=brain.bme.gatech.edu
-if [ "$HOSTNAME" = pr2c1 ] || [ "$HOSTNAME" = monty1 ]  ; then
-   export ROS_MASTER_URI=http://c1:11311
-else
-   export ROS_MASTER_URI=http://localhost:11311
-fi
+export ROS_MASTER_URI=http://localhost:11311
 
-# added by the HRL lab install script
-#source /home/dpark/.bashrc.hrl.sh
 
-# added for gazebo script
-#source /home/dpark/.bashrc.gazebo.sh
-
-# added for hark + kinect2 script
-#source /home/dpark/.bashrc.kinect2.sh
-#source /home/dpark/.bashrc.hark.sh
-
-# openvdb
-#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH:/usr/local/lib
-# camera
+# library path setup
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
-# CUDA
-if [ "$HOSTNAME" = brain ] || [ "$HOSTNAME" = epicac ] ; then
-   export PATH=/usr/local/cuda-8.0/bin:$PATH
-   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/extras/CUPTI/lib64:/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
-   export CUDA_HOME=/usr/local/cuda
-   export TORCH_DIR=$HOME/git/torch
-elif [ "$USER" = ubuntu ]; then
-   export PATH=/usr/local/cuda-8.0/bin:$PATH
-   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-   #. /home/ubuntu/git/torch/install/bin/torch-activate
-fi
-
-# TORCH
-if [ "$HOSTNAME" = brain ] ; then
-   . /home/dpark/git/torch/install/bin/torch-activate
-fi
 
 # pip
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
@@ -185,59 +144,22 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
 ## some more aliases -------------------------------------------
 # ROS
 alias indigo='source /opt/ros/indigo/setup.bash'
-alias hydro='source ~/ros_hydro/install/setup.bash'
 alias rcd='cd ~/catkin_ws'
 alias hd='source ~/ros_hydro/devel/setup.bash'
 alias devel='source ~/catkin_ws/devel/setup.bash'
 alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 
 # Robot
-alias pr2='ssh -Y monty1wan.bme.gatech.edu'
-alias pc1='ssh -Y pr2c1wan.bme.gatech.edu'
-alias pr2l='ssh -X dpark@10.68.0.1'
-alias pr2m='export ROS_MASTER_URI="http://monty1wan.bme.gatech.edu:11311"'
-alias pc1m='export ROS_MASTER_URI="http://pr2c1wan.bme.gatech.edu:11311"'
-alias pr2lm='export ROS_MASTER_URI="http://10.68.0.1:11311"'
-alias pc1d='export DISPLAY=:0.0'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
-alias brain='export ROS_MASTER_URI="http://brain.bme.gatech.edu:11311"'
-alias colossus8='export ROS_MASTER_URI="http://colossus8.bme.gatech.edu:11311"'
-alias bp='ssh administrator@10.68.0.103'
 
 # location
-alias m='cd /home/dpark/hrl_file_server/dpark_data/anomaly/RSS2016'
-alias i='cd /home/dpark/hrl_file_server/dpark_data/anomaly/ICRA2017'
-alias a='cd /home/dpark/hrl_file_server/dpark_data/anomaly/AURO2016'
-alias dd='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/'
-alias wp='roscd sandbox_dpark_darpa_m3/src/sandbox_dpark_darpa_m3/robot'
-alias qq='roscd hrl_traversability_planner'
-alias aa='roscd hrl_anomaly_detection/src/hrl_anomaly_detection/isolator'
-alias am='roscd hrl_manipulation_task/src/hrl_manipulation_task'
-alias ee='roscd hrl_execution_monitor/src/hrl_execution_monitor'
+alias aa='cd /home/dpark/code/mit/development/baxter_experiments'
+alias cc='cd /home/dpark/code/mit/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
+alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_nsf_nri_mvli/'
+alias ss='source baxter_daehyung.sh sim'
 
-# mount
-#alias hrl_mount='sudo mount -t cifs //newfiles.hsi.gatech.edu/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,domain=ad.gatech.edu,noperm,sec=ntlm' 
-alias hrl_mount='sudo mount -t cifs //ad.gatech.edu/bme/labs/hrl ~/hrl_file_server -o username=dpark8,uid=$UID,noperm,sec=ntlm' 
-alias hrl_umount='sudo umount hrl_file_server -l'
+alias ra='ssh -X dpark@128.30.27.239'
 
-# vpn
-alias vpn='sudo vpnc /etc/vpnc/gatech.conf'
-alias unvpn='sudo vpnc-disconnect'
 
-# ssh
-alias c8='ssh -X dpark@colossus8.bme.gatech.edu'
-alias c11='ssh -X dpark@colossus11.bme.gatech.edu'
-alias c12='ssh -X dpark@colossus12.bme.gatech.edu'
-alias ep='ssh -X dpark@epicac.bme.gatech.edu'
-alias br='ssh -X dpark@brain.bme.gatech.edu'
-alias ba='ssh -X dpark@baymax.bme.gatech.edu'
-alias pippin='ssh meka@143.215.230.242'
-alias bap='ssh -X administrator@143.215.225.192'
 
-#alias hark='node ~/hark/hark-designer/app.js'
-alias hk='cd ~/hark/hark-designer/userdata/networks'
 
-#git
-alias gg='git commit -a -m "test param update" && git push'
-# added by Anaconda2 4.2.0 installer
-#export PATH="/home/dpark/util/anaconda2/bin:$PATH"
