@@ -126,7 +126,7 @@ fi
 ## Run Setup Scripts --------------------------------------------
 # ROS
 source /opt/ros/indigo/setup.bash
-source ~/catkin_ws/devel_isolated/setup.bash
+#source ~/catkin_ws/devel_isolated/setup.bash
 
 # git 
 source ~/git-completion.bash 
