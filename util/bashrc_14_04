@@ -119,7 +119,7 @@ fi
 
 ## Run Setup Scripts --------------------------------------------
 # ROS
-source /opt/ros/indigo/setup.bash
+#source /opt/ros/indigo/setup.bash
 #source ~/catkin_ws/devel_isolated/setup.bash
 
 # git 
@@ -135,7 +135,7 @@ export ROS_MASTER_URI=http://localhost:11311
 
 # library path setup
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # pip
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
@@ -163,15 +163,18 @@ alias ra='ssh -X dpark@128.30.27.239'
 
 
 # added by Anaconda2 installer
-export PATH="/home/dpark/git/external/anaconda2/bin:$PATH"
-export PATH="$PATH:$HOME/bin"
+#export PATH="/home/dpark/git/external/anaconda2/bin:$PATH"
+#export PATH="$PATH:$HOME/bin"
 
 #export PYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR:/usr/include/python2.7
 #export PYTHON_LIBRARY=/usr/lib/python2.7/config-x86_64-linux-gnu/libpython2.7.so
 
 if [ "$HOSTNAME" = alex ] ; then
-   export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/drake/lib
+   export LD_LIBRARY_PATH=$(openrave0.9-config --python-dir):/usr/lib/lib64:$LD_LIBRARY_PATH
+   export PYTHONPATH=$(openrave0.9-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
+   
+   #export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
+   #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/drake/lib
 else
    export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
 fi
