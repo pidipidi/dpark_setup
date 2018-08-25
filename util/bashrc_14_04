@@ -159,7 +159,7 @@ alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_n
 alias ss='source baxter_daehyung.sh sim'
 
 alias ra='ssh -X dpark@128.30.27.239'
-
+alias alex='ssh -X dpark@128.30.31.128'
 
 
 # added by Anaconda2 installer
