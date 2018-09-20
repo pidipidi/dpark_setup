@@ -1,5 +1,5 @@
 # GHMM
-sudo apt-get install libxml2-dev swig python-joblib cython autoconf
+sudo apt-get install libxml2-dev swig python-joblib cython autoconf subversion
 mkdir ~/svn
 cd ~/svn 
 svn checkout svn://svn.code.sf.net/p/ghmm/code/trunk/ghmm ghmm 
