@@ -29,16 +29,16 @@
 )))
 
 
-(let* ((result (shell-command-to-string (concat "rospack find rosemacs")))
-       (checked-result (if (string-match "[[]" result)
-                            (progn (message result) nil)
-                          (if (string-match "[ \n]*$" result)
-                              (replace-match "" nil nil result)
-                            result))))
-         (when checked-result
-           (progn (add-to-list 'load-path checked-result)
-                  (require 'rosemacs)
-                  (invoke-rosemacs))))
+;(let* ((result (shell-command-to-string (concat "rospack find rosemacs")))
+;       (checked-result (if (string-match "[[]" result)
+;                            (progn (message result) nil)
+;                          (if (string-match "[ \n]*$" result)
+;                              (replace-match "" nil nil result)
+;                            result))))
+;         (when checked-result
+;           (progn (add-to-list 'load-path checked-result)
+;                  (require 'rosemacs)
+;                  (invoke-rosemacs))))
 
 
 (require 'rng-loc)

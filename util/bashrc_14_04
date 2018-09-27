@@ -119,7 +119,7 @@ fi
 
 ## Run Setup Scripts --------------------------------------------
 # ROS
-source /opt/ros/indigo/setup.bash
+#source /opt/ros/indigo/setup.bash
 #source ~/catkin_ws/devel_isolated/setup.bash
 
 # git 
@@ -144,7 +144,6 @@ if [ "$HOSTNAME" = rrg-achird ] ; then
 fi
 
 
-
 ## some more aliases -------------------------------------------
 # ROS
 alias indigo='source /opt/ros/indigo/setup.bash'
@@ -157,11 +156,29 @@ alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 
 # location
-alias aa='cd /home/dpark/code/mit/development/baxter_experiments'
-alias cc='cd /home/dpark/code/mit/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
+alias aa='cd /home/dpark/git/development/baxter_experiments'
+alias cc='cd /home/dpark/git/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
 alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_nsf_nri_mvli/'
 alias ss='source baxter_daehyung.sh sim'
 
 alias ra='ssh -X dpark@128.30.27.239'
+alias alex='ssh -X dpark@128.30.31.128'
 
+
+# added by Anaconda2 installer
+#export PATH="/home/dpark/git/external/anaconda2/bin:$PATH"
+#export PATH="$PATH:$HOME/bin"
+
+#export PYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR:/usr/include/python2.7
+#export PYTHON_LIBRARY=/usr/lib/python2.7/config-x86_64-linux-gnu/libpython2.7.so
+
+if [ "$HOSTNAME" = alex ] ; then
+   export LD_LIBRARY_PATH=$(openrave0.9-config --python-dir):/usr/lib/lib64:$LD_LIBRARY_PATH
+   export PYTHONPATH=$(openrave0.9-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
+   
+   #export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
+   #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/drake/lib
+else
+   export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
+fi
 
