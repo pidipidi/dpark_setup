@@ -134,11 +134,15 @@ export ROS_MASTER_URI=http://localhost:11311
 
 
 # library path setup
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # pip
-export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
+export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH
+
+if [ "$HOSTNAME" = rrg-achird ] ; then
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.5/targets/x86_64-linux/lib
+fi
+
 
 
 ## some more aliases -------------------------------------------
