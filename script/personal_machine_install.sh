@@ -3,7 +3,7 @@
 
 # 1: environment files copy
 rm ~/.bashrc
-ln -s ~/git/dpark_setup/util/bashrc_14_04 ~/.bashrc
+ln -s ~/git/dpark_setup/util/bashrc_16_04 ~/.bashrc
 ln -s ~/git/dpark_setup/util/emacs ~/.emacs
 ln -s ~/git/dpark_setup/util/git-completion.bash ~/git-completion.bash
 ln -s ~/git/dpark_setup/util/screenrc ~/.screenrc
