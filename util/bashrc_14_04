@@ -134,11 +134,10 @@ export ROS_MASTER_URI=http://localhost:11311
 
 
 # library path setup
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # pip
-export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
+#export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH
 
 
 ## some more aliases -------------------------------------------
@@ -154,12 +153,18 @@ alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 
 # location
 alias aa='cd /home/dpark/git/development/baxter_experiments'
-alias cc='cd /home/dpark/git/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
-alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_nsf_nri_mvli/'
+alias bb='cd /home/dpark/git/development/baxter_experiments/src/irl_constraints_learning'
+alias cc='cd /home/dpark/git/development/baxter_experiments/src/irl_constraints_learning/src/irl_constraints_learning'
 alias ss='source baxter_daehyung.sh sim'
-
+alias ff='cd /home/dpark/git/development/irl_constraint_learning'
 alias ra='ssh -X dpark@128.30.27.239'
+alias ba='ssh -X dpark@128.30.31.222'
+alias algol='ssh -X dpark@128.30.31.8'
+alias ost='ssh -i ~/.ssh/id_rsa -X ubuntu@128.52.160.150'
+alias al='ssh -X dpark@128.30.25.155'
 
+#git
+alias gg='git commit -a -m "test" && git push'
 
 
 # added by Anaconda2 installer
@@ -170,12 +175,25 @@ alias ra='ssh -X dpark@128.30.27.239'
 #export PYTHON_LIBRARY=/usr/lib/python2.7/config-x86_64-linux-gnu/libpython2.7.so
 
 if [ "$HOSTNAME" = alex ] ; then
-   export LD_LIBRARY_PATH=$(openrave0.9-config --python-dir):/usr/lib/lib64:$LD_LIBRARY_PATH
+   export PATH=/usr/local/cuda-8.0/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+
    export PYTHONPATH=$(openrave0.9-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
-   
+
+
+   #export LD_LIBRARY_PATH=$(openrave0.9-config --python-dir):$LD_LIBRARY_PATH:/usr/lib/lib64
+   #export PYTHONPATH=$(openrave0.9-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
+
    #export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
-   #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/drake/lib
+   #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/drake/lib   
+   export JAVA_CMD=/usr/bin/java
 else
-   export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
+   export PATH=/usr/local/cuda-8.0/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+   #export PYTHONPATH=/opt/drake/lib/python2.7/site-packages:${PYTHONPATH}
 fi
 
+alias killgazebogym='killall -9 rosout roslaunch rosmaster gzserver nodelet robot_state_publisher gzclient'
+alias killgazebogym='killall -9 gazebo rosout roslaunch rosmaster gzserver nodelet robot_state_publisher gzclient'
+export GAZEBO_MODEL_PATH=:/home/dpark/git/external/gym-gazebo/gym_gazebo/envs/installation/../assets/models
+export GYM_GAZEBO_WORLD_ROUND=/home/dpark/git/external/gym-gazebo/gym_gazebo/envs/installation/../assets/worlds/round.world
