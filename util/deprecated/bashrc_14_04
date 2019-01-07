@@ -137,15 +137,11 @@ export ROS_MASTER_URI=http://localhost:11311
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # pip
-<<<<<<< HEAD:util/bashrc_14_04
-#export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH
-=======
 export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH
 
 if [ "$HOSTNAME" = rrg-achird ] ; then
    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.5/targets/x86_64-linux/lib
 fi
->>>>>>> a069688cb38cf891ff807129ee26159dd31a18a6:util/deprecated/bashrc_14_04
 
 
 ## some more aliases -------------------------------------------
