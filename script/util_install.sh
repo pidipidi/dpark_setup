@@ -1,5 +1,5 @@
 sudo apt-get install screen subversion chromium-browser ssh terminator
-sudo apt-get install emacs meld cifs-utils vpnc nfs-common
+sudo apt-get install emacs meld cifs-utils
 sudo easy_install pip
 
 mkdir ~/util
@@ -10,10 +10,6 @@ tar -xvzf ./python-mode.el-6.2.0.tar.gz
 # git 
 git config --global user.email "pidipidi52@gmail.com"
 git config --global user.name "pidipidi"
-
-# vpn
-cd /etc/
-sudo chmod +rx vpnc 
 
 #pdf
 sudo apt-get install zenity ghostscript
