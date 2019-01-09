@@ -1,4 +1,4 @@
-sudo apt-get install screen subversion chromium-browser ssh terminator
+sudo apt-get install screen subversion ssh terminator
 sudo apt-get install emacs meld cifs-utils
 sudo easy_install pip
 

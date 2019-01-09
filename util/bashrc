@@ -127,6 +127,7 @@ export GIT_SSL_NO_VERIFY=1
 export ROBOT=sim
 #export DISPLAY=:0.0
 export ROS_MASTER_URI=http://localhost:11311
+#source /opt/ros/kinetic/setup.bash
 
 ## some more aliases -------------------------------------------
 # ROS
@@ -140,6 +141,7 @@ alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 
 # location
 alias aa='cd /home/dpark/git/development/baxter_experiments'
+alias bb='cd /home/dpark/git/development/baxter_experiments/src/irl_constraints_learning/src/irl_constraints_learning'
 alias cc='cd /home/dpark/git/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
 alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_nsf_nri_mvli/'
 alias ss='source baxter_daehyung.sh sim'
@@ -148,14 +150,14 @@ alias ra='ssh -X dpark@128.30.27.239'
 alias alex='ssh -X dpark@128.30.31.128'
 
 
-# added by Anaconda2 installer
-#export PATH="/home/dpark/git/external/anaconda2/bin:$PATH"
-#export PATH="$PATH:$HOME/bin"
+# PATH
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages
 
-#export PYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR:/usr/include/python2.7
-#export PYTHON_LIBRARY=/usr/lib/python2.7/config-x86_64-linux-gnu/libpython2.7.so
+#if [ "$HOSTNAME" = alex.csail.mit.edu ] ; then
 
-#if [ "$HOSTNAME" = alex ] ; then
+   export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+   export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
    #export LD_LIBRARY_PATH=$(openrave0.9-config --python-dir):/usr/lib/lib64:$LD_LIBRARY_PATH
    #export PYTHONPATH=$(openrave0.9-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
    

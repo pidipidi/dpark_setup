@@ -77,11 +77,12 @@
 ;;(zenburn)
 
 ;; Auto Complete
-;;(require 'auto-complete)
+;;(require '~/.emacs.d/auto-complete)
+;;(require '~/.emacs.d/popup)
 ;;(global-auto-complete-mode t)
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 
 ;; C++
@@ -117,11 +118,6 @@
 (define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
 (define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left)
 
-;; lua
-(add-to-list 'load-path "~/util/immerrr-lua-mode-bdf121b/lua-mode-el/resides")
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 ;; webmode for html
 (require 'web-mode)
