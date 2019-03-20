@@ -163,7 +163,11 @@ if [ "$HOSTNAME" = alex.csail.mit.edu ] ; then
    export GUROBI_HOME="/home/dpark/util/gurobi810/linux64"
    export PATH="${PATH}:${GUROBI_HOME}/bin"
    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-   #grbgetkey 598d257a-49f4-11e9-aeb2-02e454ff9c50
+   #grbgetkey 598d257a-49f4-11e9-aeb2-02e454ff9c50   
+fi
+if [ "$HOSTNAME" = pidi ] ; then
+   export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
+   export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
 
 
@@ -181,13 +185,5 @@ __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/dpark/miniconda2/bin/conda' sh
 #        \export PATH="/home/dpark/miniconda2/bin:$PATH"
 #    fi
 #fi
-<<<<<<< HEAD
-
-
-
-export LD_LIBRARY_PATH=$(openrave-config --python-dir):$LD_LIBRARY_PATH
-export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
-=======
 #unset __conda_setup
 ## <<< conda init <<<
->>>>>>> d93d63b63fcb2e6097ef26b74a3077ee76a1cd23
