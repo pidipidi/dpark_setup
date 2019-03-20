@@ -148,7 +148,7 @@ alias ss='source baxter_daehyung.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
 alias ra='ssh -X dpark@128.30.27.239'
-alias alex='ssh -X dpark@128.30.31.128'
+alias alex='ssh -X dpark@128.30.27.158'
 alias al='ssh -X dpark@128.30.25.155'
 alias algol='ssh -X dpark@128.30.31.8'
 alias ost='ssh -i ~/.ssh/id_rsa -X ubuntu@128.52.160.150'
@@ -175,3 +175,5 @@ alias ba='ssh -X dpark@128.30.31.222'
 
 
 
+export LD_LIBRARY_PATH=$(openrave-config --python-dir):$LD_LIBRARY_PATH
+export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH

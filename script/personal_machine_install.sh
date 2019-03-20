@@ -7,7 +7,7 @@ ln -s ~/git/private/dpark_setup/util/bashrc ~/.bashrc
 ln -s ~/git/private/dpark_setup/util/emacs ~/.emacs
 ln -s ~/git/private/dpark_setup/util/git-completion.bash ~/git-completion.bash
 ln -s ~/git/private/dpark_setup/util/screenrc ~/.screenrc
-cp -r ~/git/private/dpark_setup/util/emacs.d/* ~/.emacs.d/
+cp -r ~/git/private/dpark_setup/util/emacs.d ~/.emacs.d
 source ~/.bashrc 
 
 # 2: ros
