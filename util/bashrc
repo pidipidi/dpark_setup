@@ -169,6 +169,11 @@ if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
+if [ "$HOSTNAME" = husky8 ] ; then
+   export LD_LIBRARY_PATH=/usr/local/lib
+   #export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:$LD_LIBRARY_PATH
+   export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
+fi
 
 
 ## added by Miniconda2 4.5.12 installer
