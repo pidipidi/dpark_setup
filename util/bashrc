@@ -162,8 +162,10 @@ alias tx2='ssh nvidia@128.30.27.251'
 if [ "$HOSTNAME" = alex.csail.mit.edu ] ; then
    export GUROBI_HOME="/home/dpark/util/gurobi810/linux64"
    export PATH="${PATH}:${GUROBI_HOME}/bin"
-   export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib:/usr/lib/x86_64-linux-gnu
    #grbgetkey 598d257a-49f4-11e9-aeb2-02e454ff9c50   
+   export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
+   export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
 if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
