@@ -8,7 +8,7 @@ startup_message off
 vbell off
 
 # keep scrollback n lines
-defscrollback 1000
+defscrollback 15000
 
 shelltitle "$ |bash"
 

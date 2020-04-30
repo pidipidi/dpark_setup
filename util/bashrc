@@ -142,23 +142,24 @@ alias devel_i='source ~/catkin_ws/devel_isolated/setup.bash'
 # Robot
 alias rsl='export ROS_MASTER_URI="http://localhost:11311"'
 
+
 # location
 alias aa='cd /home/dpark/git/development/husky/ur5_exp_test'
 alias bb='cd /home/dpark/git/development/husky/ur5_exp_test/src/sandbox/irl_constraints_learning/src/irl_constraints_learning'
-alias cc='cd /home/dpark/git/development/baxter_experiments/src/manipulator_controller/src/manipulator_controller'
-alias hh='cd /home/dpark/code/mit/development/language-understanding-demo/h2sl_nsf_nri_mvli/'
-alias ss='source baxter_daehyung.sh sim'
+alias cc='cd /home/dpark/git/development/husky/ur5_exp_test/src/behaviors/behavior_tree/src/behavior_tree'
+alias hh='cd /home/dpark/git/development/husky/ur5_exp_test/src/sandbox/incremental_cbn_irl/cont_cbnirl/src/cont_cbnirl'
+alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
 alias ra='ssh -X dpark@128.30.27.239'
-alias alex='ssh -X dpark@128.30.27.158'
+alias alex='ssh -X dpark@alex.csail.mit.edu'
 alias al='ssh -X dpark@128.30.25.155'
 alias algol='ssh -X dpark@128.30.31.8'
 alias ost='ssh -i ~/.ssh/id_rsa -X ubuntu@128.52.160.150'
 alias ra='ssh -X dpark@128.30.27.239'
 alias ba='ssh -X dpark@128.30.31.222'
 alias tx2='ssh nvidia@128.30.27.251'
-alias dell2='ssh dpark@128.30.31.113'
+alias dell2='ssh dpark@128.31.37.29'
 
 
 if [ "$HOSTNAME" = alex.csail.mit.edu ] ; then
@@ -166,7 +167,7 @@ if [ "$HOSTNAME" = alex.csail.mit.edu ] ; then
    export PATH="${PATH}:${GUROBI_HOME}/bin"
    #grbgetkey 598d257a-49f4-11e9-aeb2-02e454ff9c50   
    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib:/usr/lib/x86_64-linux-gnu
-   export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:$LD_LIBRARY_PATH
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(openrave-config --python-dir)/openravepy/_openravepy_0_9:/usr/local/lib
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
 if [ "$HOSTNAME" = pidi ] ; then
