@@ -21,6 +21,4 @@ source ~/.bashrc
 #./ros_git_install.sh
 #./svn_install.sh
 
-git config --global user.name "Daehyung Park"
-git config --global user.email "daehyung@csail.mit.edu"
 
