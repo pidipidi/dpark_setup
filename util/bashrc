@@ -133,7 +133,7 @@ export ROS_MASTER_URI=http://localhost:11311
 
 ## some more aliases -------------------------------------------
 # location
-alias aa='cd /home/dpark/git/development/husky/ur5_exp_test'
+alias aa='cd /home/dpark/git/development/CS492_IIR'
 alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
@@ -152,3 +152,6 @@ if [ "$HOSTNAME" = husky8 ] ; then
 fi
 
 
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"

@@ -1,0 +1,15 @@
+[Unit]
+Description=Barrier Client mouse/keyboard share
+Requires=display-manager.service
+After=display-manager.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=forking
+ExecStart=/snap/bin/barrier.barrierc --no-restart --name dparknuc --enable-crypto 192.168.0.117
+Restart=always
+RestartSec=10
+User=dpark
+
+[Install]
+WantedBy=multi-user.target
