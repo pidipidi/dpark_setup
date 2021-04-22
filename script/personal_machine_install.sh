@@ -11,7 +11,7 @@ cp -r ~/git/private/dpark_setup/util/emacs.d ~/.emacs.d
 source ~/.bashrc 
 
 # 2: ros
-./ros_install.sh
+#./ros_install.sh
 
 # 3: ml
 ./ml_install.sh
