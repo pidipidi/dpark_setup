@@ -139,7 +139,7 @@ alias gg='git commit -a -m "test" && git push'
 
 alias alex='ssh -X dpark@alex.csail.mit.edu'
 alias dell2='ssh dpark@128.31.37.29'
-
+alias hawk='ssh -x daehyung@143.248.139.11'
 
 if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
