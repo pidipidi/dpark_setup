@@ -1,5 +1,6 @@
 sudo apt-get install screen subversion ssh terminator
 sudo apt-get install emacs meld cifs-utils
+sudo apt-get install mlocate
 sudo easy_install pip
 
 mkdir ~/util

@@ -137,7 +137,7 @@ alias aa='cd /home/dpark/git/development/CS492_IIR'
 alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
-alias alex='ssh -X dpark@alex.csail.mit.edu'
+alias hawk='ssh -X daehyung@143.248.139.11'
 alias dell2='ssh dpark@128.31.37.29'
 
 
