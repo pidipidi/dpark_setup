@@ -10,6 +10,10 @@ tar -xvzf ./python-mode.el-6.2.3.tar.gz
 # git 
 git config --global user.email "pidipidi52@gmail.com"
 git config --global user.name "pidipidi"
+git config -l
+
+# git token by 220815
+# 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
 
 #pdf
 sudo apt-get install zenity ghostscript

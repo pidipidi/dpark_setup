@@ -133,12 +133,14 @@ export ROS_MASTER_URI=http://localhost:11311
 
 ## some more aliases -------------------------------------------
 # location
-alias aa='cd /home/dpark/git/development/CS492_IIR'
+alias aa='cd ~/git/development'
+alias cc='cd ~/git/class/catkin_ws'
 alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
 alias alex='ssh -X dpark@alex.csail.mit.edu'
 alias dell2='ssh dpark@128.31.37.29'
+alias robot='ssh robot@143.248.138.140 -p 9922'
 
 
 if [ "$HOSTNAME" = pidi ] ; then
@@ -151,7 +153,6 @@ if [ "$HOSTNAME" = husky8 ] ; then
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+
