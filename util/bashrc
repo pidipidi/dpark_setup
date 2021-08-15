@@ -141,6 +141,7 @@ alias gg='git commit -a -m "test" && git push'
 alias alex='ssh -X dpark@alex.csail.mit.edu'
 alias dell2='ssh dpark@128.31.37.29'
 alias robot='ssh robot@143.248.138.140 -p 9922'
+alias hawk='ssh -x daehyung@143.248.139.11'
 
 
 if [ "$HOSTNAME" = pidi ] ; then
