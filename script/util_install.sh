@@ -14,6 +14,6 @@ git config --global user.name "pidipidi"
 
 #pdf
 sudo apt-get install zenity ghostscript
-cd ~/.gnome2/nautilus-scripts/
-wget https://launchpad.net/compress-pdf/1.x/1.5/+download/Compress-PDF-1.5.tar.gz
-tar zvxf Compress-PDF-1.5.tar.gz
+#cd ~/.gnome2/nautilus-scripts/
+#wget https://launchpad.net/compress-pdf/1.x/1.5/+download/Compress-PDF-1.5.tar.gz
+#tar zvxf Compress-PDF-1.5.tar.gz

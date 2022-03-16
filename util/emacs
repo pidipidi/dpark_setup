@@ -109,7 +109,11 @@
 (setq py-install-directory "~/util/python-mode.el-6.2.3/")
 (add-to-list 'load-path py-install-directory)
 (require 'python-mode)
-
+(global-eldoc-mode -1)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (kill-local-variable 'eldoc-documentation-function)))
+            
 ;; Disable C-z
 (global-unset-key (kbd "C-z"))
 

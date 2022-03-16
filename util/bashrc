@@ -118,6 +118,10 @@ fi
 
 
 ## Custom Setup
+# ROS
+alias noetic="source /opt/ros/noetic/setup.bash; echo \"Noetic is Activated!\""
+alias foxy="source /opt/ros/foxy/setup.bash; echo \"Foxy is Activated!\""
+
 # git 
 source ~/git-completion.bash 
 export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\%s)")\[\e[0m\]>' 
@@ -144,6 +148,10 @@ alias dell2='ssh dpark@128.31.37.29'
 if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
+fi
+if [ "$HOSTNAME" = gram ] ; then
+   export LD_LIBRARY_PATH=/home/daehyung/.mujoco/mujoco210/bin:$LD_LIBRARY_PATH
+   #export PYTHONPATH=/home/daehyung/.local/lib:$PYTHONPATH
 fi
 if [ "$HOSTNAME" = husky8 ] ; then
    export LD_LIBRARY_PATH=/usr/local/lib
