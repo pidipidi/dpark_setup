@@ -137,12 +137,14 @@ export ROS_MASTER_URI=http://localhost:11311
 
 ## some more aliases -------------------------------------------
 # location
-alias aa='cd /home/dpark/git/development/CS492_IIR'
+alias aa='cd /home/daehyung/git/development/cs592_sol_ws/src/cs592_RLI_sol/assignment_2'
 alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
 alias hawk='ssh -X daehyung@143.248.139.11'
 alias dell2='ssh dpark@128.31.37.29'
+
+export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
 
 if [ "$HOSTNAME" = pidi ] ; then
@@ -153,13 +155,30 @@ if [ "$HOSTNAME" = gram ] ; then
    export LD_LIBRARY_PATH=/home/daehyung/.mujoco/mujoco210/bin:$LD_LIBRARY_PATH
    #export PYTHONPATH=/home/daehyung/.local/lib:$PYTHONPATH
 fi
-if [ "$HOSTNAME" = husky8 ] ; then
-   export LD_LIBRARY_PATH=/usr/local/lib
-   #export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:$LD_LIBRARY_PATH
-   export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_0_9:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
-fi
+#if [ "$HOSTNAME" = hawk ] ; then
+
+#fi
 
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/daehyung/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/daehyung/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/daehyung/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/daehyung/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+
+source /home/daehyung/.local/bin/virtualenvwrapper.sh
