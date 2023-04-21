@@ -163,3 +163,17 @@ fi
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+
+
+
+#export ROS_MASTER_URI=http://192.168.0.3:11311
+#export ROS_IP=192.168.0.4
+#export ROS_MASTER_URI=http://192.168.1.50:11311
+#export ROS_IP=192.168.1.5
+#unset ROS_PACKAGE_PATH && unset ROS_ETC_DIR && unset ROS_ROOT
+
+# For ROS2
+export ROS_DOMAIN_ID=10
+source /usr/share/colcon_cd/function/colcon_cd.sh
+export _colcon_cd_root=/opt/ros/foxy/
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
