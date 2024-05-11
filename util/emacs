@@ -28,26 +28,6 @@
 
 )))
 
-
-;(let* ((result (shell-command-to-string (concat "rospack find rosemacs")))
-;       (checked-result (if (string-match "[[]" result)
-;                            (progn (message result) nil)
-;                          (if (string-match "[ \n]*$" result)
-;                              (replace-match "" nil nil result)
-;                            result))))
-;         (when checked-result
-;           (progn (add-to-list 'load-path checked-result)
-;                  (require 'rosemacs)
-;                  (invoke-rosemacs))))
-
-
-(require 'rng-loc)
-(condition-case nil ;; error e.g. when running as root
-    (push (concat (ros-package-path "rosemacs") "/rng-schemas.xml") rng-schema-locating-files)
-  (error nil))
-(add-to-list 'auto-mode-alist '("\.launch$" . nxml-mode))
-(add-to-list 'auto-mode-alist '("manifest.xml" . nxml-mode))
-
 (global-set-key "\M-g" 'goto-line)              ; Esc-G runs the goto-line
                                                 ; function.
 
@@ -73,65 +53,47 @@
  )
 
 ;; Color
-(load-file "~/.emacs.d/color-theme/zenburn-theme.el")
-;;(zenburn)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
 
-;; Auto Complete
-;;(require '~/.emacs.d/auto-complete)
-;;(require '~/.emacs.d/popup)
-;;(global-auto-complete-mode t)
-(add-to-list 'load-path "~/.emacs.d/lisp")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
 
-;; C++
-(defun c++-comment-region()
- "Comment a region out"
- (interactive)
- (save-excursion
-   (save-restriction
-     (narrow-to-region (point) (mark))
-     (goto-char (point-min))
-     (while (> (point-max) (point))
- (c++-comment-line)
- (forward-line)))))
-
-(defun c++-comment-line()
- "Comment a line of C++ out"
- (beginning-of-line)
- (insert "//"))
-
-(setq c-default-style "linux"
-      c-basic-offset 4)
-
-;; Python
-(setq py-install-directory "~/util/python-mode.el-6.2.3/")
-(add-to-list 'load-path py-install-directory)
-(require 'python-mode)
-(global-eldoc-mode -1)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (kill-local-variable 'eldoc-documentation-function)))
-            
 ;; Disable C-z
 (global-unset-key (kbd "C-z"))
 
-;; (define-key map (kbd "TAB") 'py-indent-or-complete)
-;;(define-key map (kbd "TAB") 'py-indent-line)
-(define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
-(define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left)
-
-
 ;; webmode for html
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;;(require 'web-mode)
+;;(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-(setq max-lisp-eval-depth 10000)
+
+(eval-when-compile
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
+  (require 'use-package))
+
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+  (setq elpy-rpc-python-command "python3")
+  (setq elpy-rpc-backend "jedi")
+  (elpy-use-cpython (or (executable-find "python3")
+                        (executable-find "/usr/bin/python3")
+                        (executable-find "/usr/local/bin/python3")
+                        "python3"))
+  ;; (elpy-use-ipython)
+  (setq python-shell-interpreter-args "--simple-prompt -i")
+  (add-hook 'python-mode-hook (lambda ()
+                              (setq indent-tabs-mode nil))))
+ 
+(use-package ein
+	     :ensure t)
+
+
+
+

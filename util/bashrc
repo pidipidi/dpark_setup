@@ -117,89 +117,39 @@ if ! shopt -oq posix; then
 fi
 
 
-## Custom Setup
 
+
+
+
+## Custom Setup
 # git 
 source ~/git-completion.bash 
 export PS1='\[\e[36;1m\]\u@\[\e[32;1m\]\H:\[\e[0m\]\W\[\e[31;1m\]$(__git_ps1 "(\%s)")\[\e[0m\]>' 
 export GIT_SSL_NO_VERIFY=1
 
 git config --global --replace-all  user.name "Daehyung Park"
-#git config --global user.email "daehyung@csail.mit.edu"
 
 # Custom 
+export ROBOT=sim
 #export DISPLAY=:0.0
 export ROS_MASTER_URI=http://localhost:11311
 
 ## some more aliases -------------------------------------------
 # location
-alias aa='cd /home/daehyung/git/development/cs592_sol_ws/src/cs592_RLI_sol/assignment_2'
+alias aa='cd ~/git/development'
+alias cc='cd ~/git/class/catkin_ws'
 alias ss='source ./robot.sh sim'
 alias gg='git commit -a -m "test" && git push'
 
-alias hawk='ssh -X daehyung@143.248.139.11'
+alias alex='ssh -X dpark@alex.csail.mit.edu'
 alias dell2='ssh dpark@128.31.37.29'
-
-export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+alias robot='ssh robot@143.248.138.140 -p 9922'
+alias hawk='ssh -x daehyung@143.248.139.11'
 
 
 if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
-if [ "$HOSTNAME" = gram ] ; then
-   export LD_LIBRARY_PATH=/home/daehyung/.mujoco/mujoco210/bin:$LD_LIBRARY_PATH
-   #export PYTHONPATH=/home/daehyung/.local/lib:$PYTHONPATH
-fi
-if [ "$HOSTNAME" = hawk ] ; then
-   # >>> conda initialize >>>
-   # !! Contents within this block are managed by 'conda init' !!
-   #__conda_setup="$('/home/daehyung/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-   #if [ $? -eq 0 ]; then
-   #    eval "$__conda_setup"
-   #else
-   #   if [ -f "/home/daehyung/anaconda3/etc/profile.d/conda.sh" ]; then
-   #     . "/home/daehyung/anaconda3/etc/profile.d/conda.sh"
-   #   else      
-   #     export PATH="/home/daehyung/anaconda3/bin:$PATH"
-   #   fi
-   #fi
-   #unset __conda_setup
-   # <<< conda initialize <<<
-   #source /home/daehyung/.local/bin/virtualenvwrapper.sh
-   cd
-fi
 
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
-
-
-# For ROS
-alias noetic="source /opt/ros/noetic/setup.bash; export ROS_PYTHON_VERSION=2; echo \"Noetic is Activated!\""
-alias foxy="source /opt/ros/foxy/setup.bash; ROS_VERSION=2; export ROS_PYTHON_VERSION=3; echo \"Foxy is Activated!\""
-export ROBOT=sim
-
-#export ROS_MASTER_URI=http://192.168.0.3:11311
-#export ROS_IP=192.168.0.4
-#export ROS_MASTER_URI=http://192.168.1.50:11311
-#export ROS_IP=192.168.1.5
-#unset ROS_PACKAGE_PATH && unset ROS_ETC_DIR && unset ROS_ROOT
-
-# For ROS2
-export ROS_DOMAIN_ID=10
-source /usr/share/colcon_cd/function/colcon_cd.sh
-export _colcon_cd_root=/opt/ros/foxy/
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-
-alias cba='colcon build --symlink-install'
-alias ccc='colcon build --symlink-install && source ./install/local_setup.bash'
-alias cbp='colcon build --symlink-install --packages-select'
-alias cbu='colcon build --symlink-install --packages-up-to'
-
-alias rt='ros2 topic list'
-alias re='ros2 topid echo'
-alias rn='ros2 node list'
-
-alias aa='cd git/development/manipulation_ws'
