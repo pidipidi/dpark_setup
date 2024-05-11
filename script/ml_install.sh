@@ -1,8 +1,10 @@
-sudo apt-get install python-pip -y
+
+sudo apt-get install pip -y
+
 
 ## machine learning
-python3 -m install -U pip
-python3 -m pip install -U matplotlib
+python -m pip install -U pip
+python -m pip install -U matplotlib
 
 #sudo apt-get install build-essential python-dev python-setuptools \
 #                     libatlas-dev libatlas3gf-base -y

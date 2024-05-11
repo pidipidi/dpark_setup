@@ -1,3 +1,8 @@
+;;(require 'package)
+;;(add-to-list 'package-archives
+;;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+             
+
 (add-hook 'xml-mode-hook   ; XML-specific settings
         (function (lambda()
 
@@ -39,17 +44,18 @@
 (show-paren-mode t)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(ein elpy use-package))
  '(show-paren-mode t)
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
+ '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify)))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 ;; Color
@@ -72,27 +78,23 @@
 ;;(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
 
-(eval-when-compile
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
-  (require 'use-package))
-
 (use-package elpy
   :ensure t
   :config
   (elpy-enable)
   (setq elpy-rpc-python-command "python3")
   (setq elpy-rpc-backend "jedi")
-  (elpy-use-cpython (or (executable-find "python3")
-                        (executable-find "/usr/bin/python3")
-                        (executable-find "/usr/local/bin/python3")
-                        "python3"))
+  ;;(elpy-use-cpython (or (executable-find "python3")
+  ;;                      (executable-find "/usr/bin/python3")
+  ;;                      (executable-find "/usr/local/bin/python3")
+  ;;                      "python3"))
   ;; (elpy-use-ipython)
   (setq python-shell-interpreter-args "--simple-prompt -i")
   (add-hook 'python-mode-hook (lambda ()
                               (setq indent-tabs-mode nil))))
  
-(use-package ein
-	     :ensure t)
+;;(use-package ein
+;;	     :ensure t)
 
 
 
