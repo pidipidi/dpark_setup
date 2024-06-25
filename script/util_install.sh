@@ -1,4 +1,4 @@
-sudo apt-get install -y screen subversion ssh terminator barrier
+sudo apt-get install -y screen subversion ssh terminator barrier mlocate
 sudo apt-get install -y emacs meld cifs-utils
 sudo apt install -y pip
 

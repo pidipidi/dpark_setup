@@ -99,3 +99,13 @@
 
 
 
+(defun my-comment-region (beg end &optional arg)
+  (interactive "r\nP")
+  (comment-region beg end arg))
+
+(defun my-uncomment-region (beg end &optional arg)
+  (interactive "r\nP")
+  (uncomment-region beg end arg))
+
+(global-set-key (kbd "C-c c") 'my-comment-region)
+(global-set-key (kbd "C-c u") 'my-uncomment-region)
