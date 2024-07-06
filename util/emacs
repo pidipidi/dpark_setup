@@ -1,7 +1,23 @@
-;;(require 'package)
-;;(add-to-list 'package-archives
-;;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-             
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents     ; Unless a package archive already exists,
+  (package-refresh-contents))        ; Refresh package contents so that Emacs knows which packages to load
+
+;; Bootstrap 'use-package'
+(eval-after-load 'gnutls
+  '(add-to-list 'gnutls-trustfiles "/etc/ssl/cert.pem"))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+(require 'bind-key)
+(setq use-package-always-ensure t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'xml-mode-hook   ; XML-specific settings
         (function (lambda()
@@ -60,6 +76,7 @@
 
 ;; Color
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(package-install 'zenburn-theme)
 (load-theme 'zenburn t)
 
 
@@ -109,3 +126,5 @@
 
 (global-set-key (kbd "C-c c") 'my-comment-region)
 (global-set-key (kbd "C-c u") 'my-uncomment-region)
+
+
