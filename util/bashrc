@@ -147,12 +147,20 @@ alias robot='ssh robot@143.248.138.140 -p 9922'
 alias hawk='ssh -X daehyung@143.248.139.11'
 alias haetae='ssh -X haetae2030@192.168.0.19'
 
+source /opt/ros/humble/setup.bash
+source /usr/share/colcon_cd/function/colcon_cd.sh
+export _colcon_cd_root=/opt/ros/humble/
+source /usr/share/gazebo/setup.bash
+export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11/worlds:${GAZEBO_RESOURCE_PATH}
+alias sss='source ./install/setup.bash'
+alias ccc='colcon build --symlink-install && source ./install/setup.bash'
+
+
 if [ "$HOSTNAME" = pidi ] ; then
    export LD_LIBRARY_PATH=$(openrave-config --python-dir)/openravepy/_openravepy_:$LD_LIBRARY_PATH
    export PYTHONPATH=$(openrave-config --python-dir)/openravepy/_openravepy_:/home/dpark/git/external/trajopt:/home/dpark/git/external/trajopt/build_trajopt/lib:$PYTHONPATH
 fi
 
-<<<<<<< HEAD
 if [ "$HOSTNAME" = hawk ] ; then
 
    # >>> conda initialize >>>
@@ -176,12 +184,3 @@ if [ "$HOSTNAME" = hawk ] ; then
 
 fi
 
-=======
-source /opt/ros/humble/setup.bash
-source /usr/share/colcon_cd/function/colcon_cd.sh
-export _colcon_cd_root=/opt/ros/humble/
-source /usr/share/gazebo/setup.bash
-export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-11/worlds:${GAZEBO_RESOURCE_PATH}
-alias sss='source ./install/setup.bash'
-alias ccc='colcon build --symlink-install && source ./install/setup.bash'
->>>>>>> c6c35171dd787260ee4d83fcaadced076886c7df
