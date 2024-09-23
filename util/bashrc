@@ -182,5 +182,9 @@ if [ "$HOSTNAME" = hawk ] ; then
    export PATH="$HOME/.rbenv/bin:$PATH"
    eval "$(rbenv init -)"
 
+   export PATH=/usr/local/cuda-12.4/bin:${PATH}
+
+   export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:${LD_LIBRARY_PATH}
+   
 fi
 
